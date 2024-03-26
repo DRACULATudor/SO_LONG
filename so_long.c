@@ -6,7 +6,7 @@
 /*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 16:57:33 by tlupu             #+#    #+#             */
-/*   Updated: 2024/03/26 17:31:08 by tlupu            ###   ########.fr       */
+/*   Updated: 2024/03/26 21:14:32 by tlupu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int		validate_map_features_custom(char **arr)
 	return(0);
 }
 
-int	validate_map_element(char **arr)
+int	validate_map_element(char **arr, t_mlx *win)
 {
 	int	i;
 	int	valid;
@@ -61,21 +61,25 @@ int	validate_map_element(char **arr)
 	last_row_index = 0;
 	last_column_index = 0;
 	while (arr[0][j] != '\0')
-	{
+	{	
 		last_column_index = j;
 		j++;
 	}
-	last_column_index--;
+	win->width = j;
+	j--;
+	last_column_index --;
 	while (arr[i] != NULL)
 	{
 		last_row_index = i;
 		i++;
 	}
+	win->height = last_row_index + 1; 
 	j = 0;
 	while (j <= last_column_index)
 	{
 		if (arr[0][j] != '1' || arr[last_row_index][j] != '1')
 		{
+			printf("height is %d\n Last com %d\n j is %i, %c %c", win->height, last_row_index, j, arr[0][j], arr[last_row_index][j]);
 			printf("Error ->WrongWall\n");
 			return (1);
 		}
@@ -95,7 +99,7 @@ int	validate_map_element(char **arr)
 	return (valid);
 }
 
-int	validate_map_features(char **arr)
+int	validate_map_features(char **arr, t_mlx *win)
 {
 	int	i;
 	int	j;
@@ -120,7 +124,7 @@ int	validate_map_features(char **arr)
 		}
 		i++;
 	}
-	valid = validate_map_element(arr);
+	valid = validate_map_element(arr, win);
 	return (valid);
 }
 
@@ -174,6 +178,7 @@ char	**fill_map_arr(char *filename)
 // }
 int	main(int argc, char **argv)
 {
+	int 	j;
 	int		i;
 	char	**arr;
 	t_mlx   win;
@@ -186,22 +191,34 @@ int	main(int argc, char **argv)
 			- 2] != 'e' || argv[1][i - 1] != 'r'))
 		return (1);
 	arr = fill_map_arr(argv[1]);
-	validate = validate_map_features(arr);
+	validate = validate_map_features(arr, &win);
 	/*to show mlx image handling*/
-	char	*relative_path = "textures/Mountain.xpm";
-	int		img_width = 30;
-	int		img_height  = 30;
+	char	*relative_path = "textures/Background.xpm";
+	int		img_width = 1900;
+	int		img_height  = 1050;
 	if (validate == 0)
 {
+	i = 0;
     win.mlx = mlx_init();
-    win.mlx_win = mlx_new_window(win.mlx, 1920, 1080, "So_Long");
+    win.mlx_win = mlx_new_window(win.mlx, 64 * win.width, 64 * win.height, "So_Long");
     win.test_img = mlx_xpm_file_to_image(win.mlx, relative_path, &img_width, &img_height);
     if (win.test_img == NULL)
     {
         printf("Error loading image\n");
         return (1);
     }
-    mlx_put_image_to_window(win.mlx, win.mlx_win, win.test_img, 500, 500);
+	while (arr[i] != NULL)
+	{
+		j = 0;
+		while (arr[i][j])
+		{
+			mlx_put_image_to_window(win.mlx, win.mlx_win, win.test_img, j * 64, i * 64);
+			j++;
+		}
+		i++;
+	}
+	i --;
+    mlx_put_image_to_window(win.mlx, win.mlx_win, win.test_img, j * 64, i * 64);
     mlx_loop(win.mlx);
 }
 	return (0);

@@ -1,0 +1,22 @@
+/* XPM */
+static char *Cloud_small_31711466869[] = {
+/* columns rows colors chars-per-pixel */
+"15 12 4 1 ",
+"  c None",
+". c #2E222F",
+"X c #C7DCD0",
+"o c white",
+/* pixels */
+"   .....       ",
+"  .XXXXX.      ",
+" .XooooXX...   ",
+".XooooXXoooo.  ",
+".ooooXooooooo. ",
+".ooooXoooooooo.",
+"oooooooooooooo.",
+"XooooooooooooX.",
+"XXooooooooooX. ",
+".XXoooXXXXXX.  ",
+" .XXXX......   ",
+"  ....         "
+};

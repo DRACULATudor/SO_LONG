@@ -1,0 +1,16 @@
+/* XPM */
+static char *Light_31711466868[] = {
+/* columns rows colors chars-per-pixel */
+"16 4 6 1 ",
+"  c None",
+". c #2E222F",
+"X c #7F708A",
+"o c #9BABB2",
+"O c #C7DCD0",
+"+ c white",
+/* pixels */
+"  ..X......X..  ",
+" .OOOOOOOOOOOO. ",
+".Oo++++++++++oO.",
+" .............. "
+};

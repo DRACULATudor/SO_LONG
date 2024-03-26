@@ -1,0 +1,35 @@
+/* XPM */
+static char *Door_opened1711466868[] = {
+/* columns rows colors chars-per-pixel */
+"13 23 6 1 ",
+"  c None",
+". c #2E222F",
+"X c #CD683D",
+"o c #E6904E",
+"O c #9BABB2",
+"+ c #C7DCD0",
+/* pixels */
+"  ...........",
+".ooooooooooo.",
+".ooooooooooo.",
+".ooooooooooo.",
+".ooooooooooo.",
+".ooooooooooo.",
+".ooooooooooo.",
+".ooooooooooo.",
+".ooooooooooo.",
+".ooooooooooo.",
+".ooooooo..oo.",
+".oooooo.++.o.",
+".oooooo.++.o.",
+".oooooo.OO.o.",
+".ooooooX..Xo.",
+".oooooooXXoo.",
+".ooooooooooo.",
+".ooooooooooo.",
+".ooooooooooo.",
+".ooooooooooo.",
+".ooooooooooo.",
+".XXXXXXXXXXX.",
+".XXXXXXXXXXX."
+};

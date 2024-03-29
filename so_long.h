@@ -6,7 +6,7 @@
 /*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 11:41:36 by tlupu             #+#    #+#             */
-/*   Updated: 2024/03/26 17:13:08 by tlupu            ###   ########.fr       */
+/*   Updated: 2024/03/29 13:41:32 by tlupu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,13 @@ typedef struct s_mlx
 	void	*mlx;
 	void	*mlx_win;
 	void	*test_img;
+	void 	*charcaterimg;
+	void 	*colectableimg;
+	void 	*coin_imgs[8];
+	char 	**arr;
 }				t_mlx;
+
+
 
 void	*ft_memmove(void *dst, const void *src, size_t len);
 void   *ft_memcpy(void *dst, const void *src, size_t len);

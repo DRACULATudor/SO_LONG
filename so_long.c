@@ -6,7 +6,7 @@
 /*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 16:57:33 by tlupu             #+#    #+#             */
-/*   Updated: 2024/03/29 15:48:44 by tlupu            ###   ########.fr       */
+/*   Updated: 2024/04/01 22:19:33 by tlupu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,11 +179,16 @@ void	put_collectable(t_mlx *win)
 	int		i;
 	int		img_width;
 	int		img_height;
-	char	*paths[8] = {"textures/coins/c1.xpm", "textures/coins/c2.xpm",
-			"textures/coins/c3.xpm", "textures/coins/c4.xpm",
-			"textures/coins/c5.xpm", "textures/coins/c6.xpm",
-			"textures/coins/c7.xpm", "textures/coins/c8.xpm"};
+	char	*paths[8];
 
+	paths[0] = "textures/coins/c1.xpm";
+	paths[1] = "textures/coins/c2.xpm";
+	paths[2] = "textures/coins/c3.xpm";
+	paths[3] = "textures/coins/c4.xpm";
+	paths[4] = "textures/coins/c5.xpm";
+	paths[5] = "textures/coins/c6.xpm";
+	paths[6] = "textures/coins/c7.xpm";
+	paths[7] = "textures/coins/c8.xpm";
 	img_width = 64;
 	img_height = 64;
 	i = 0;
@@ -198,43 +203,6 @@ void	put_collectable(t_mlx *win)
 		}
 		i++;
 	}
-}
-
-int	display_next_frame(t_mlx *win)
-{
-	static int	current_frame = 0;
-	static int	counter = 0;
-	int			i;
-	int			j;
-
-	if (win == NULL || win->arr == NULL)
-	{
-		printf("Error: arr or win is NULL\n");
-		return (1);
-	}
-	i = 0;
-	
-	while (win->arr[i] != NULL)
-	{
-		j = 0;
-		while (win->arr[i][j] != '\0')
-		{
-			if (win->arr[i][j] == 'C')
-			{
-				mlx_put_image_to_window(win->mlx, win->mlx_win,
-					win->coin_imgs[current_frame], j * 64, i * 64);
-			}
-			j++;
-		}
-		i++;
-	}
-	if (counter % 2500 == 0)
-	{
-		current_frame = (current_frame + 1) % 8;
-		counter = 0;
-	}
-	counter++;
-	return (0);
 }
 
 void	get_cooridnates_sprts(char **arr, t_mlx *win)
@@ -253,7 +221,7 @@ void	get_cooridnates_sprts(char **arr, t_mlx *win)
 	}
 	i = 0;
 	relative_path_wall = "textures/wall.xpm";
-	relative_path_character = "textures/Character.xpm";
+	relative_path_character = "textures/character/CharacterRight.xpm";
 	img_height = 64;
 	img_width = 64;
 	win->test_img = mlx_xpm_file_to_image(win->mlx, relative_path_wall,
@@ -287,6 +255,169 @@ void	get_cooridnates_sprts(char **arr, t_mlx *win)
 	}
 }
 
+void	display_door(t_mlx *win)
+{
+	int		i;
+	int		image_height;
+	int		image_width;
+	char	*path[5];
+
+	path[0] = "textures/door/door1.xpm";
+	path[1] = "textures/door/door2.xpm";
+	path[2] = "textures/door/door3.xpm";
+	path[3] = "textures/door/door4.xpm";
+	path[4] = "textures/door/door5.xpm";
+	i = 0;
+	image_height = 64;
+	image_width = 64;
+	while (i < 5)
+	{
+		win->door_imgs[i] = mlx_xpm_file_to_image(win->mlx, path[i],
+				&image_width, &image_height);
+		if (win->coin_imgs[i] == NULL)
+		{
+			printf("Error loading image: %s\n", path[i]);
+			return ;
+		}
+		i++;
+	}
+}
+
+int	display_next_frame_and_door(t_mlx *win)
+{
+	static int	current_frame = 0;
+	static int	door_frame = 0;
+	static int	counter = 0;
+	int			i;
+	int			j;
+
+	if (win == NULL || win->arr == NULL)
+	{
+		printf("Error: arr or win is NULL\n");
+		return (1);
+	}
+	i = 0;
+	while (win->arr[i] != NULL)
+	{
+		j = 0;
+		while (win->arr[i][j] != '\0')
+		{
+			if (win->arr[i][j] == 'C')
+			{
+				mlx_put_image_to_window(win->mlx, win->mlx_win,
+					win->coin_imgs[current_frame], j * 64, i * 64);
+			}
+			if (win->arr[i][j] == 'E')
+			{
+				mlx_put_image_to_window(win->mlx, win->mlx_win,
+					win->door_imgs[door_frame], j * 64, i * 64);
+			}
+			j++;
+		}
+		i++;
+	}
+	if (counter % 3500 == 0)
+	{
+		current_frame = (current_frame + 1) % 8;
+		door_frame = (door_frame + 1) % 5;
+		counter = 0;
+	}
+	counter++;
+	return (0);
+}
+
+void	update_position(t_mlx *win, int key_code, char **arr)
+{
+	int		i;
+	int		j;
+	int		img_width;
+	int		img_height;
+	char	*path_ml;
+	char	*path_Ul;
+	char 	*path_ur;
+	char	*path_r;
+
+	i = 0;
+	path_ml = "textures/character/CharacterMoreRight.xpm";
+	path_Ul = "textures/character/CharacterUltraRight.xpm";
+	path_r = "textures/character/CharacterLeft.xpm";
+	path_ur = "textures/character/CharacterUltraLeft.xpm";
+	img_height = 64;
+	img_width = 64;
+	win->character_img_l = mlx_xpm_file_to_image(win->mlx, path_ml, &img_width,
+			&img_height);
+	win->character_img_r = mlx_xpm_file_to_image(win->mlx, path_r, &img_width,
+			&img_height);
+	win->character_img_Ul = mlx_xpm_file_to_image(win->mlx, path_Ul, &img_width,
+			&img_height);
+	win->character_img_ur = mlx_xpm_file_to_image(win->mlx, path_ur, &img_width,
+			&img_height);
+	while (arr[i] != NULL)
+	{
+		j = 2;
+		while (arr[i][j] != '\0')
+		{
+			if (arr[i][j] == 'P')
+			{
+				if (key_code == A && j > 0 && arr[i][j - 1] != '1')
+					// remember to make shift & a for ultra boost//
+				{
+					mlx_put_image_to_window(win->mlx, win->mlx_win,
+						win->background_img, j * 64, i * 64);
+					arr[i][j] = '0';
+					arr[i][j - 1] = 'P';
+					mlx_put_image_to_window(win->mlx, win->mlx_win,
+						win->character_img_l, (j - 1) * 64, i * 64);
+					return ;
+				}
+				else if (key_code == D && j > 0 && arr[i][j + 1] != '1')
+				{
+					mlx_put_image_to_window(win->mlx, win->mlx_win,
+						win->background_img, j * 64, i * 64);
+					arr[i][j] = '0';
+					arr[i][j + 1] = 'P';
+					mlx_put_image_to_window(win->mlx, win->mlx_win,
+						win->character_img_r, (j + 1) * 64, i * 64);
+					return ;
+				}
+				else if (key_code == S)
+				{
+					arr[i][j] = '0'; 
+        			arr[i + 1][j] = 'P';
+					mlx_put_image_to_window(win->mlx, win->mlx_win,
+						win->background_img, j * 64, i * 64);
+					mlx_put_image_to_window(win->mlx, win->mlx_win,
+						win->character_img_ur, j * 64, (i + 1) * 64);
+					return;
+				}
+				else if(key_code == W)
+				{
+					arr[i][j] = '0'; 
+        			arr[i - 1][j] = 'P';
+					mlx_put_image_to_window(win->mlx, win->mlx_win,
+						win->background_img, j * 64, i * 64);
+					mlx_put_image_to_window(win->mlx,  win->mlx_win, win->charcaterimg, j * 64, (i - 1) * 64);
+				}
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+int	key_hook(int key_code, t_mlx *win)
+{
+	static int	count;
+
+	count = 0;
+	printf("%d\n", key_code);
+	if (key_code == A || key_code == W || key_code == S || key_code == D)
+	{
+		update_position(win, key_code, win->arr);
+	}
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	int		j;
@@ -315,9 +446,9 @@ int	main(int argc, char **argv)
 		win.mlx = mlx_init();
 		win.mlx_win = mlx_new_window(win.mlx, 64 * win.width, 64 * win.height,
 				"So_Long");
-		win.test_img = mlx_xpm_file_to_image(win.mlx, relative_path, &img_width,
-				&img_height);
-		if (win.test_img == NULL)
+		win.background_img = mlx_xpm_file_to_image(win.mlx, relative_path,
+				&img_width, &img_height);
+		if (win.background_img == NULL)
 		{
 			printf("Error loading image\n");
 			return (1);
@@ -327,19 +458,21 @@ int	main(int argc, char **argv)
 			j = 0;
 			while (arr[i][j])
 			{
-				mlx_put_image_to_window(win.mlx, win.mlx_win, win.test_img, j
-					* 64, i * 64);
+				mlx_put_image_to_window(win.mlx, win.mlx_win,
+					win.background_img, j * 64, i * 64);
 				j++;
 			}
 			i++;
 		}
 		i--;
-		mlx_put_image_to_window(win.mlx, win.mlx_win, win.test_img, j * 64, i
-			* 64);
+		mlx_put_image_to_window(win.mlx, win.mlx_win, win.background_img, j
+			* 64, i * 64);
 		put_collectable(&win);
+		display_door(&win);
 		win.arr = arr;
 		get_cooridnates_sprts(arr, &win);
-		mlx_loop_hook(win.mlx, display_next_frame, &win);
+		mlx_loop_hook(win.mlx, display_next_frame_and_door, &win);
+		mlx_key_hook(win.mlx_win, key_hook, (void *)&win);
 		mlx_loop(win.mlx);
 	}
 	return (0);

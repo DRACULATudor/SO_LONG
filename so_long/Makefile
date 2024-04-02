@@ -6,13 +6,13 @@
 #    By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/15 16:47:59 by tlupu             #+#    #+#              #
-#    Updated: 2024/03/25 15:05:11 by tlupu            ###   ########.fr        #
+#    Updated: 2024/04/02 12:19:51 by tlupu            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
 CC = cc
-MLX_DIR = lib/mlx_linux
+MLX_DIR = mlx_linux
 MLX_LIB = libmlx.a
 GET_NEXT_LINE = get_next_line.a
 GNL_DIR = get_next_line

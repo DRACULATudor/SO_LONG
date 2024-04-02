@@ -6,7 +6,7 @@
 /*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 11:41:36 by tlupu             #+#    #+#             */
-/*   Updated: 2024/04/01 21:54:34 by tlupu            ###   ########.fr       */
+/*   Updated: 2024/04/02 20:04:13 by tlupu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 # define SO_LONG_H
 
 # include "get_next_line/get_next_line.h"
-# include "lib/mlx_linux/mlx.h"
+# include "mlx_linux/mlx.h"
 # include <stdio.h>
 # include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 # include <unistd.h>
 
 typedef struct s_mlx
@@ -26,7 +27,10 @@ typedef struct s_mlx
 	int		height;
 	int 	special_key;
 	int 	x;
+	bool 	exit;
+	bool 	isd;
 	int 	y;
+	int 	key_release;
 	void	*mlx;
 	void	*mlx_win;
 	void	*test_img;
@@ -52,7 +56,9 @@ typedef	struct s_info
 # define A 97
 # define S 115
 # define D 100
+# define ESC 27
 # define TS 64
+# define MAX 100
 
 void		*ft_memmove(void *dst, const void *src, size_t len);
 void		*ft_memcpy(void *dst, const void *src, size_t len);

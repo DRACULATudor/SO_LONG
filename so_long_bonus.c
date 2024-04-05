@@ -6,7 +6,7 @@
 /*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 16:57:33 by tlupu             #+#    #+#             */
-/*   Updated: 2024/04/05 20:24:45 by tlupu            ###   ########.fr       */
+/*   Updated: 2024/04/05 20:51:54 by tlupu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -494,6 +494,7 @@ void	game_over(t_mlx *win)
     char	*path;
     int		image_width;
     int		image_height;
+	long long int 	i = 20000;
 
 	
 	win->over = true;
@@ -503,8 +504,13 @@ void	game_over(t_mlx *win)
     win->over_img = mlx_xpm_file_to_image(win->mlx, path, &image_width,
             &image_height);
     mlx_clear_window(win->mlx, win->mlx_win);
-    mlx_put_image_to_window(win->mlx, win->mlx_win, win->over_img, 0, 0); 
+	while (i > 0)
+	{
+    	mlx_put_image_to_window(win->mlx, win->mlx_win, win->over_img, 0, 0); 
+		i--;
+	}
     mlx_loop_hook(win->mlx, NULL, NULL);
+	exit(0);
 }
 
 int	bullet_shooting(t_mlx *win)

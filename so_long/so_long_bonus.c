@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   so_long_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 16:57:33 by tlupu             #+#    #+#             */
-/*   Updated: 2024/04/04 17:24:16 by tlupu            ###   ########.fr       */
+/*   Updated: 2024/04/05 20:24:45 by tlupu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -255,136 +255,6 @@ void	get_cooridnates_sprts(char **arr, t_mlx *win)
 	}
 }
 
-int	is_valid(int x, int y, int visited[][MAX], char **arr)
-{
-	if (x >= 0)
-	{
-		if (x < MAX)
-		{
-			if (y >= 0)
-			{
-				if (y < MAX)
-				{
-					if (arr[x][y] != '1')
-					{
-						if (!visited[x][y])
-						{
-							return (1);
-						}
-					}
-				}
-			}
-		}
-	}
-	return (0);
-}
-
-void	flood_fill(char **tab, t_mlx size, t_mlx begin, int *collectibles,
-		int *exits)
-{
-	char	c;
-	t_mlx	p;
-
-	if (begin.x < 0 || begin.x >= size.x || begin.y < 0 || begin.y >= size.y)
-	{
-		return ;
-	}
-	c = tab[begin.y][begin.x];
-	if (c == '1' || c == 'F') // Don't traverse walls or already visited cells
-	{
-		return ;
-	}
-	if (c == 'C')
-		(*collectibles)++;
-	else if (c == 'E')
-		(*exits)++;
-	tab[begin.y][begin.x] = 'F'; // Mark cell as visited
-	// Traverse adjacent cells
-	p.x = begin.x;
-	p.y = begin.y - 1;
-	flood_fill(tab, size, p, collectibles, exits);
-	p.y = begin.y + 1;
-	flood_fill(tab, size, p, collectibles, exits);
-	p.x = begin.x + 1;
-	p.y = begin.y;
-	flood_fill(tab, size, p, collectibles, exits);
-	p.x = begin.x - 1;
-	flood_fill(tab, size, p, collectibles, exits);
-}
-int	check_path(t_mlx *win)
-{
-	int		i;
-	int		j;
-	int		start_x;
-	int		start_y;
-	int		colect_num;
-	int		colect;
-	int		exits;
-	t_mlx	size;
-	int		count;
-	int		countrow;
-	t_mlx	begin;
-	char	**map_copy;
-
-	start_x = -1;
-	start_y = -1;
-	colect_num = 0;
-	colect = 0;
-	exits = 0;
-	i = 0;
-	while (win->arr[i] != NULL)
-	{
-		j = 0;
-		count = 0;
-		while (win->arr[i][j] != '\0')
-		{
-			if (win->arr[i][j] == 'P')
-			{
-				start_x = i;
-				start_y = j;
-			}
-			else if (win->arr[i][j] == 'C')
-			{
-				colect_num++;
-			}
-			j++;
-			count = j;
-		}
-		i++;
-		countrow = i;
-	}
-	if (start_x == -1 || start_y == -1)
-	{
-		printf("No player start point (P) found in the map\n");
-		return (0);
-	}
-	size.x = count;
-	size.y = countrow;
-	begin.x = start_y;
-	begin.y = start_x;
-	map_copy = malloc(sizeof(char *) * (countrow + 1));
-	for (i = 0; i < countrow; i++)
-	{
-		map_copy[i] = strdup(win->arr[i]);
-	}
-	map_copy[countrow] = NULL;
-	flood_fill(win->arr, size, begin, &colect, &exits);
-	for (i = 0; i < countrow; i++)
-	{
-		free(map_copy[i]);
-	}
-	free(map_copy);
-	if (colect != colect_num || exits == 0)
-	{
-		printf("Invalid map\n");
-		return (0);
-	}
-	else
-	{
-		printf("Valid map\n");
-		return (1);
-	}
-}
 void	display_door(t_mlx *win)
 {
 	int		i;
@@ -518,6 +388,237 @@ int	get_e_y(char **map)
 	return (0);
 }
 
+int	get_b_y(char **map)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	while (map[y])
+	{
+		x = 0;
+		while (map[y][x])
+		{
+			if (map[y][x] == 'B')
+				return (y);
+			x++;
+		}
+		y++;
+	}
+	return (0);
+}
+
+int	get_b_x(char **map)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	while (map[y])
+	{
+		x = 0;
+		while (map[y][x])
+		{
+			if (map[y][x] == 'B')
+				return (x);
+			x++;
+		}
+		y++;
+	}
+	return (0);
+}
+
+void	put_troop(t_mlx *win)
+{
+	int		i;
+	int		image_width;
+	int		image_height;
+	char	*path[8];
+
+	path[0] = "textures/enemy/enemy1.xpm";
+	path[1] = "textures/enemy/enemy2.xpm";
+	path[2] = "textures/enemy/enemy3.xpm";
+	path[3] = "textures/enemy/enemy4.xpm";
+	path[4] = "textures/enemy/enemy5.xpm";
+	path[5] = "textures/enemy/enemy6.xpm";
+	path[6] = "textures/enemy/enemy7.xpm";
+	path[7] = "textures/enemy/enemy8.xpm";
+	image_height = 64;
+	image_width = 64;
+	i = 0;
+	while (i < 8)
+	{
+		win->enemy[i] = mlx_xpm_file_to_image(win->mlx, path[i], &image_width,
+				&image_height);
+		if (win->enemy[i] == NULL)
+		{
+			printf("Error loading image: %s\n", path[i]);
+			return ;
+		}
+		i++;
+	}
+}
+
+void	display_bullet(t_mlx *win)
+{
+	int		i;
+	int		image_width;
+	int		image_height;
+	char	*path[7];
+
+	path[0] = "textures/bullet/bullet7.xpm";
+	path[1] = "textures/bullet/bullet6.xpm";
+	path[2] = "textures/bullet/bullet5.xpm";
+	path[3] = "textures/bullet/bullet4.xpm";
+	path[4] = "textures/bullet/bullet3.xpm";
+	path[5] = "textures/bullet/bullet2.xpm";
+	path[6] = "textures/bullet/bullet1.xpm";
+	i = 0;
+	while (i < 7)
+	{
+		win->bullet_img[i] = mlx_xpm_file_to_image(win->mlx, path[i],
+				&image_width, &image_height);
+		if (win->bullet_img[i] == NULL)
+		{
+			printf("Error loading image: %s\n", path[i]);
+			return ;
+		}
+		i++;
+	}
+}
+
+void	game_over(t_mlx *win)
+{
+    char	*path;
+    int		image_width;
+    int		image_height;
+
+	
+	win->over = true;
+	path = "textures/gameover.xpm";
+    image_width = 640;
+    image_height = 360;
+    win->over_img = mlx_xpm_file_to_image(win->mlx, path, &image_width,
+            &image_height);
+    mlx_clear_window(win->mlx, win->mlx_win);
+    mlx_put_image_to_window(win->mlx, win->mlx_win, win->over_img, 0, 0); 
+    mlx_loop_hook(win->mlx, NULL, NULL);
+}
+
+int	bullet_shooting(t_mlx *win)
+{
+	int			i;
+	int			j;
+	static int	counter;
+	static int	frame;
+	static int	bullet_i = -1;
+	static int	bullet_j = -1;
+	static int	initial_i = -1;
+	static int	initial_j = -1;
+
+	i = 0;
+	while (win->arr[i] != NULL)
+	{
+		j = 0;
+		while (win->arr[i][j] != '\0')
+		{
+			if (win->arr[i][j] == 'B')
+			{
+				if (frame == 6)
+				{
+					if (win->arr[i][j - 1] == '0' && j > 0)
+					{
+						win->arr[i][j] = '0';
+						win->arr[i][j - 1] = 'B';
+						mlx_put_image_to_window(win->mlx, win->mlx_win,
+							win->bullet_img[1], (j - 1) * 64, i * 64);
+						frame = 0;
+					}
+					else if (win->arr[i][j - 1] == 'P' && j > 0)
+					{
+						game_over(win);
+					}
+					else
+					{
+						win->arr[i][j] = '0';
+						win->arr[initial_i][initial_j] = 'B';
+						mlx_put_image_to_window(win->mlx, win->mlx_win,
+							win->bullet_img[0], initial_j * 64, initial_i * 64);
+						frame = 0;
+					}
+					if (win->over == false)
+					{
+						mlx_put_image_to_window(win->mlx, win->mlx_win,
+							win->background_img, bullet_j * 64, bullet_i * 64);
+					}
+				}
+				bullet_i = i;
+				bullet_j = j;
+				if (initial_i == -1 && initial_j == -1)
+				{
+					initial_i = i;
+					initial_j = j;
+				}
+			}
+			j++;
+		}
+		i++;
+	}
+	if (counter % 300 == 0 && win->exit == false)
+	{
+		frame = (frame + 1) % 7;
+		mlx_put_image_to_window(win->mlx, win->mlx_win, win->bullet_img[frame],
+			bullet_j * 64, bullet_i * 64);
+		counter = 0;
+	}
+	else if (win->exit == true && counter % 550 == 0)
+	{
+		frame = (frame + 1) % 7;
+		mlx_put_image_to_window(win->mlx, win->mlx_win, win->bullet_img[frame],
+			bullet_j * 64, bullet_i * 64);
+		counter = 0;
+	}
+	counter++;
+	return (0);
+}
+int	display_troop(t_mlx *win)
+{
+	static int	counter = 0;
+	static int	current_frame = 0;
+	int			i;
+	int			j;
+
+	if (win == NULL || win->arr == NULL)
+	{
+		printf("Error: arr or win is NULL\n");
+		return (1);
+	}
+	i = 0;
+	while (win->arr[i] != NULL)
+	{
+		j = 0;
+		while (win->arr[i][j] != '\0')
+		{
+			if (win->arr[i][j] == 'T')
+			{
+				mlx_put_image_to_window(win->mlx, win->mlx_win,
+					win->enemy[current_frame], j * 64, i * 64);
+			}
+			j++;
+		}
+		i++;
+	}
+	if (counter % 1000 == 0)
+	{
+		current_frame = (current_frame + 1) % 8;
+		counter = 0;
+	}
+	counter++;
+	return (0);
+}
+
 int	display_next_frame_and_door(t_mlx *win)
 {
 	static int	current_frame = 0;
@@ -561,6 +662,10 @@ int	display_next_frame_and_door(t_mlx *win)
 					win->exit = true;
 					return (0);
 				}
+				if (win->arr[i][j] == 'T')
+				{
+					display_troop(win);
+				}
 			}
 			j++;
 		}
@@ -577,9 +682,7 @@ int	display_next_frame_and_door(t_mlx *win)
 			}
 		}
 		if (!(check_for_colectables(win)))
-		{
 			counter = 0;
-		}
 	}
 	counter++;
 	return (0);
@@ -614,7 +717,8 @@ void	update_position(t_mlx *win, int key_code, char **arr)
 		{
 			if (arr[i][j] == 'P')
 			{
-				if (key_code == A && j > 0 && arr[i][j - 1] != '1')
+				if (key_code == A && j > 0 && arr[i][j - 1] != '1' && arr[i][j
+					- 1] != 'T' && arr[i][j - 1] != 'B')
 				{
 					if (win->exit == false && arr[i][j - 1] != 'E')
 					{
@@ -637,7 +741,7 @@ void	update_position(t_mlx *win, int key_code, char **arr)
 					return ;
 				}
 				else if (key_code == D && j < (win->width - 1) && arr[i][j
-					+ 1] != '1')
+					+ 1] != '1' && arr[i][j + 1] != 'T' && arr[i][j + 1] != 'B')
 				{
 					if (win->exit == false && arr[i][j + 1] != 'E')
 					{
@@ -659,7 +763,8 @@ void	update_position(t_mlx *win, int key_code, char **arr)
 					}
 					return ;
 				}
-				else if (key_code == S && arr[i + 1][j] != '1')
+				else if (key_code == S && arr[i + 1][j] != '1' && arr[i
+					+ 1][j] != 'T' && arr[i][j + 1] != 'B')
 				{
 					if (win->exit == false && arr[i + 1][j] != 'E')
 					{
@@ -683,7 +788,8 @@ void	update_position(t_mlx *win, int key_code, char **arr)
 				}
 				else if (key_code == W)
 				{
-					if (i > 0 && arr[i - 1][j] != '1')
+					if (i > 0 && arr[i - 1][j] != '1' && arr[i - 1][j] != 'T'
+						&& arr[i - 1][j] != 'B')
 					{
 						if (win->exit == false && arr[i - 1][j] != 'E')
 						{
@@ -755,7 +861,7 @@ void	fill(char **tab, t_point size, t_point begin, char to_fill[])
 		return ;
 	c = tab[begin.y][begin.x];
 	i = 0;
-	while (i < 4)
+	while (i < 5)
 	{
 		if (c == to_fill[i])
 		{
@@ -785,7 +891,7 @@ void	free_arr(char **arr)
 	free(arr);
 }
 
-int	check_if_c_e_p(char **map2)
+int	check_if_c_e_p_2(char **map2)
 {
 	int	i;
 	int	j;
@@ -797,6 +903,31 @@ int	check_if_c_e_p(char **map2)
 		while (map2[i][j] != '\0')
 		{
 			if (map2[i][j] == 'P' || map2[i][j] == 'C' || map2[i][j] == 'E')
+			{
+				printf("Inavlid maasdas-<\n");
+				free_arr(map2);
+				return (0);
+			}
+			j++;
+		}
+		i++;
+	}
+	return (1);
+}
+
+int	check_if_c_e_p(char **map2)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map2[i] != NULL)
+	{
+		j = 0;
+		while (map2[i][j] != '\0')
+		{
+			if (map2[i][j] == 'P' || map2[i][j] == 'C' || map2[i][j] == 'E'
+				|| map2[i][j] == 'T' || map2[i][j] == 'B')
 			{
 				printf("Inavlid map path :-<\n");
 				free_arr(map2);
@@ -815,13 +946,15 @@ int	check_valid(char **map, int x, int y, int map_width, int map_height)
 	int		i;
 	int		valid;
 	t_point	begin;
-	char	to_fill[4];
+	char	to_fill[6];
 	char	**map2;
 
 	to_fill[0] = 'P';
 	to_fill[1] = '0';
 	to_fill[2] = 'C';
 	to_fill[3] = 'E';
+	to_fill[4] = 'T';
+	to_fill[5] = 'B';
 	size.x = map_width;
 	size.y = map_height;
 	i = 0;
@@ -835,7 +968,8 @@ int	check_valid(char **map, int x, int y, int map_width, int map_height)
 	}
 	map2[i] = NULL;
 	fill(map2, size, begin, to_fill);
-	valid = check_if_c_e_p(map2);
+	i = 0;
+	valid = check_if_c_e_p_2(map2);
 	return (valid);
 }
 
@@ -861,88 +995,108 @@ int	check_map(char **map)
 	return (valid);
 }
 
-int close_event(t_mlx *win)
+int	close_event(t_mlx *win)
 {
-    mlx_destroy_window(win->mlx, win->mlx_win);
-    exit(0);
+	mlx_destroy_window(win->mlx, win->mlx_win);
+	exit(0);
 }
 
-int validate_args(int argc, char **argv, t_mlx *win)
+int	validate_args(int argc, char **argv, t_mlx *win)
 {
-    int i;
+	int	i;
 
-    if (argc != 2)
-        return (1);
-    win->exit = false;
-    i = ft_strleng(argv[1]);
-    if (i < 4 || (argv[1][i - 4] != '.' || argv[1][i - 3] != 'b' || argv[1][i - 2] != 'e' || argv[1][i - 1] != 'r'))
-        return (1);
-    return (0);
+	if (argc != 2)
+		return (1);
+	win->exit = false;
+	i = ft_strleng(argv[1]);
+	if (i < 4 || (argv[1][i - 4] != '.' || argv[1][i - 3] != 'b' || argv[1][i
+			- 2] != 'e' || argv[1][i - 1] != 'r'))
+		return (1);
+	return (0);
 }
 
-void setup_mlx(t_mlx *win, char *relative_path)
+void	setup_mlx(t_mlx *win, char *relative_path)
 {
-    int img_width = 64;
-    int img_height = 64;
+	int	img_width;
+	int	img_height;
 
-    win->mlx = mlx_init();
-    win->mlx_win = mlx_new_window(win->mlx, 64 * win->width, 64 * win->height, "So_Long");
-    win->background_img = mlx_xpm_file_to_image(win->mlx, relative_path, &img_width, &img_height);
+	img_width = 64;
+	img_height = 64;
+	win->mlx = mlx_init();
+	win->mlx_win = mlx_new_window(win->mlx, 64 * win->width, 64 * win->height,
+			"So_Long");
+	win->background_img = mlx_xpm_file_to_image(win->mlx, relative_path,
+			&img_width, &img_height);
 }
 
-void draw_background(t_mlx *win)
+void	draw_background(t_mlx *win)
 {
-    int i = 0;
-    int j;
+	int	i;
+	int	j;
 
-    while (win->arr[i] != NULL)
-    {
-        j = 0;
-        while (win->arr[i][j])
-        {
-            mlx_put_image_to_window(win->mlx, win->mlx_win, win->background_img, j * 64, i * 64);
-            j++;
-        }
-        i++;
-    }
-    i--;
-    mlx_put_image_to_window(win->mlx, win->mlx_win, win->background_img, j * 64, i * 64);
+	i = 0;
+	while (win->arr[i] != NULL)
+	{
+		j = 0;
+		while (win->arr[i][j])
+		{
+			mlx_put_image_to_window(win->mlx, win->mlx_win, win->background_img,
+				j * 64, i * 64);
+			j++;
+		}
+		i++;
+	}
+	i--;
+	mlx_put_image_to_window(win->mlx, win->mlx_win, win->background_img, j * 64,
+		i * 64);
 }
 
-void setup_hooks(t_mlx *win)
+int	display_all(t_mlx *win)
 {
-    mlx_loop_hook(win->mlx, display_next_frame_and_door, win);
-    mlx_key_hook(win->mlx_win, key_hook, (void *)win);
-    mlx_hook(win->mlx_win, 17, 1L<<17, close_event, win);
+	display_next_frame_and_door(win);
+	display_troop(win);
+	bullet_shooting(win);
+	return (0);
 }
 
-int main(int argc, char **argv)
+void	setup_hooks(t_mlx *win)
 {
-    t_mlx win;
-    char **arr;
-    char *relative_path = "textures/Background.xpm";
-    int valid, validate;
+	mlx_loop_hook(win->mlx, display_all, win);
+	mlx_key_hook(win->mlx_win, key_hook, (void *)win);
+	mlx_hook(win->mlx_win, 17, 1L << 17, close_event, win);
+}
 
-    if (validate_args(argc, argv, &win))
-        return (1);
-    arr = fill_map_arr(argv[1]);
-    valid = check_map(arr);
-    validate = validate_map_features(arr, &win);
-    win.arr = arr;
-    if (validate == 0 && valid == 1)
-    {
-        setup_mlx(&win, relative_path);
-        if (win.background_img == NULL)
-        {
-            printf("Error loading image\n");
-            return (1);
-        }
-        draw_background(&win);
-        put_collectable(&win);
-        display_door(&win);
-        get_cooridnates_sprts(arr, &win);
-        setup_hooks(&win);
-        mlx_loop(win.mlx);
-    }
-    return (0);
+int	main(int argc, char **argv)
+{
+	t_mlx	win;
+	char	**arr;
+	char	*relative_path;
+	
+	win.over = false;
+	relative_path = "textures/Background.xpm";
+	int valid, validate;
+	if (validate_args(argc, argv, &win))
+		return (1);
+	arr = fill_map_arr(argv[1]);
+	valid = check_map(arr);
+	validate = validate_map_features(arr, &win);
+	win.arr = arr;
+	if (validate == 0 && valid == 1)
+	{
+		setup_mlx(&win, relative_path);
+		if (win.background_img == NULL)
+		{
+			printf("Error loading image\n");
+			return (1);
+		}
+		draw_background(&win);
+		put_collectable(&win);
+		display_door(&win);
+		put_troop(&win);
+		display_bullet(&win);
+		get_cooridnates_sprts(arr, &win);
+		setup_hooks(&win);
+		mlx_loop(win.mlx);
+	}
+	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/15 16:47:59 by tlupu             #+#    #+#              #
-#    Updated: 2024/04/02 12:19:51 by tlupu            ###   ########.fr        #
+#    Updated: 2024/04/04 17:53:15 by tlupu            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,8 @@ GET_NEXT_LINE = get_next_line.a
 GNL_DIR = get_next_line
 SRCS = so_long.c utils.c
 OBJS = $(SRCS:.c=.o)
+BONUS = so_long_bonus.c utils.c
+OBJSBON = $(BONUS:.c=.o)
 
 %.o: %.c
 	$(CC) -Wall -Wextra -Werror -Imlx -c $< -o $@ 
@@ -27,11 +29,17 @@ all: $(NAME)
 $(NAME): $(OBJS) $(MLX_DIR)/$(MLX_LIB) $(GNL_DIR)/$(GET_NEXT_LINE)
 	$(CC) -o $(NAME) $(OBJS) -L$(MLX_DIR) -lmlx -L$(GNL_DIR) -l:$(GET_NEXT_LINE) -lXext -lX11 -lm
 
+bonus: $(OBJSBON) $(MLX_DIR)/$(MLX_LIB) $(GNL_DIR)/$(GET_NEXT_LINE)
+	$(CC) -o $(NAME) $(OBJSBON) -L$(MLX_DIR) -lmlx -L$(GNL_DIR) -l:$(GET_NEXT_LINE) -lXext -lX11 -lm
+
 $(MLX_DIR)/$(MLX_LIB):
 	$(MAKE) -C $(MLX_DIR)
 
 $(GNL_DIR)/$(GET_NEXT_LINE):
 	$(MAKE) -C $(GNL_DIR)
+
+
+
 
 clean:
 	$(MAKE)	clean -C $(MLX_DIR)

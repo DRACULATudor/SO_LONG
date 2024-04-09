@@ -6,7 +6,7 @@
 /*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 16:57:33 by tlupu             #+#    #+#             */
-/*   Updated: 2024/04/04 17:24:16 by tlupu            ###   ########.fr       */
+/*   Updated: 2024/04/09 17:24:34 by tlupu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -279,112 +279,6 @@ int	is_valid(int x, int y, int visited[][MAX], char **arr)
 	return (0);
 }
 
-void	flood_fill(char **tab, t_mlx size, t_mlx begin, int *collectibles,
-		int *exits)
-{
-	char	c;
-	t_mlx	p;
-
-	if (begin.x < 0 || begin.x >= size.x || begin.y < 0 || begin.y >= size.y)
-	{
-		return ;
-	}
-	c = tab[begin.y][begin.x];
-	if (c == '1' || c == 'F') // Don't traverse walls or already visited cells
-	{
-		return ;
-	}
-	if (c == 'C')
-		(*collectibles)++;
-	else if (c == 'E')
-		(*exits)++;
-	tab[begin.y][begin.x] = 'F'; // Mark cell as visited
-	// Traverse adjacent cells
-	p.x = begin.x;
-	p.y = begin.y - 1;
-	flood_fill(tab, size, p, collectibles, exits);
-	p.y = begin.y + 1;
-	flood_fill(tab, size, p, collectibles, exits);
-	p.x = begin.x + 1;
-	p.y = begin.y;
-	flood_fill(tab, size, p, collectibles, exits);
-	p.x = begin.x - 1;
-	flood_fill(tab, size, p, collectibles, exits);
-}
-int	check_path(t_mlx *win)
-{
-	int		i;
-	int		j;
-	int		start_x;
-	int		start_y;
-	int		colect_num;
-	int		colect;
-	int		exits;
-	t_mlx	size;
-	int		count;
-	int		countrow;
-	t_mlx	begin;
-	char	**map_copy;
-
-	start_x = -1;
-	start_y = -1;
-	colect_num = 0;
-	colect = 0;
-	exits = 0;
-	i = 0;
-	while (win->arr[i] != NULL)
-	{
-		j = 0;
-		count = 0;
-		while (win->arr[i][j] != '\0')
-		{
-			if (win->arr[i][j] == 'P')
-			{
-				start_x = i;
-				start_y = j;
-			}
-			else if (win->arr[i][j] == 'C')
-			{
-				colect_num++;
-			}
-			j++;
-			count = j;
-		}
-		i++;
-		countrow = i;
-	}
-	if (start_x == -1 || start_y == -1)
-	{
-		printf("No player start point (P) found in the map\n");
-		return (0);
-	}
-	size.x = count;
-	size.y = countrow;
-	begin.x = start_y;
-	begin.y = start_x;
-	map_copy = malloc(sizeof(char *) * (countrow + 1));
-	for (i = 0; i < countrow; i++)
-	{
-		map_copy[i] = strdup(win->arr[i]);
-	}
-	map_copy[countrow] = NULL;
-	flood_fill(win->arr, size, begin, &colect, &exits);
-	for (i = 0; i < countrow; i++)
-	{
-		free(map_copy[i]);
-	}
-	free(map_copy);
-	if (colect != colect_num || exits == 0)
-	{
-		printf("Invalid map\n");
-		return (0);
-	}
-	else
-	{
-		printf("Valid map\n");
-		return (1);
-	}
-}
 void	display_door(t_mlx *win)
 {
 	int		i;

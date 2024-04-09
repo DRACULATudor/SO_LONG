@@ -6,7 +6,7 @@
 /*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 11:41:36 by tlupu             #+#    #+#             */
-/*   Updated: 2024/04/05 20:21:45 by tlupu            ###   ########.fr       */
+/*   Updated: 2024/04/09 17:25:27 by tlupu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,16 @@ typedef struct s_mlx
 	int		x;
 	int		bullet_x;
 	int		bullet_y;
+	int		leng;
+	int 	count1122;
+	int		heng;
 	bool	path;
+	bool 	number;
+	bool	wall;
 	bool	exit;
 	bool	flag;
 	bool	isd;
-	bool 	over;
+	bool	over;
 	bool	is_bullet_active;
 	int		y;
 	int		key_release;
@@ -53,7 +58,7 @@ typedef struct s_mlx
 	void	*character_img_r;
 	void	*character_img_ur;
 	void	*character_img_Ul;
-	void 	*over_img;
+	void	*over_img;
 	void	*colectableimg;
 	void	*background_img;
 	void	*coin_imgs[8];
@@ -80,5 +85,6 @@ void		*ft_memmove(void *dst, const void *src, size_t len);
 void		*ft_memcpy(void *dst, const void *src, size_t len);
 int			ft_strleng(char *str);
 int			close_event(t_mlx *win);
+char		*ft_itoa(int n);
 
 #endif

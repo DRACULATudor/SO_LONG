@@ -6,7 +6,7 @@
 /*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 14:59:42 by tlupu             #+#    #+#             */
-/*   Updated: 2024/03/25 15:05:55 by tlupu            ###   ########.fr       */
+/*   Updated: 2024/04/09 15:57:05 by tlupu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,81 @@ int ft_strleng(char *str)
 	while (str[i] != '\0' && str[i] != '\n')
 		i++;
 	return(i);
+}
+
+int	ft_count_num(int n)
+{
+	int	count;
+
+	count = 0;
+	if (n <= 0)
+	{
+		count++;
+	}
+	while (n != 0)
+	{
+		n = n / 10;
+		count++;
+	}
+	return (count);
+}
+
+void	*ft_memset(void *b, int c, size_t len)
+{
+	char	*s;
+	size_t	i;
+
+	s = (char *)b;
+	i = 0;
+	while (i < len)
+	{
+		s[i] = c;
+		i++;
+	}
+	return (b);
+}
+void	*ft_calloc(size_t count, size_t size)
+{
+	size_t	i;
+	void	*ptr;
+
+	i = count * size;
+	ptr = malloc(i);
+	if (ptr == NULL)
+	{
+		return (NULL);
+	}
+	ft_memset(ptr, 0, i);
+	return (ptr);
+}
+
+
+
+char	*ft_itoa(int n)
+{
+	char		*str;
+	int			i;
+	long long	temp;
+
+	temp = n;
+	str = (char *)ft_calloc((ft_count_num(n) + 1) * sizeof(char), 1);
+	if (str == NULL)
+		return (0);
+	if (temp == 0)
+		str[0] = '0';
+	if (temp < 0)
+	{
+		str[0] = '-';
+		temp = temp * -1;
+	}
+	i = ft_count_num(n);
+	while (temp != 0)
+	{
+		str[i - 1] = (temp % 10) + '0';
+		temp = temp / 10;
+		i--;
+	}
+	return (str);
 }
 
 void	*ft_memmove(void *dst, const void *src, size_t len)

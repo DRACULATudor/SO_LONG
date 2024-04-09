@@ -6,7 +6,7 @@
 /*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 16:57:33 by tlupu             #+#    #+#             */
-/*   Updated: 2024/04/05 20:51:54 by tlupu            ###   ########.fr       */
+/*   Updated: 2024/04/09 17:50:46 by tlupu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,14 @@ int	validate_map_features_custom(char **arr)
 	int	i;
 	int	j;
 	int	pande;
+	int	enemy;
 	int	c;
 
 	i = 0;
 	j = 0;
 	c = 0;
 	pande = 0;
+	enemy = 0;
 	while (arr[i] != NULL)
 	{
 		j = 0;
@@ -32,6 +34,8 @@ int	validate_map_features_custom(char **arr)
 				pande++;
 			else if (arr[i][j] == 'C')
 				c++;
+			else if (arr[i][j] == 'T' || arr[i][j] == 'B')
+				enemy++;
 			j++;
 		}
 		i++;
@@ -42,6 +46,11 @@ int	validate_map_features_custom(char **arr)
 		return (1);
 	}
 	if (c < 1)
+	{
+		printf("Invalid elements\n");
+		return (1);
+	}
+	if (enemy > 2)
 	{
 		printf("Invalid elements\n");
 		return (1);
@@ -489,27 +498,52 @@ void	display_bullet(t_mlx *win)
 	}
 }
 
+void	length(t_mlx *win)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (win->arr[i] != NULL)
+	{
+		i++;
+	}
+	win->heng = i;
+	j = 0;
+	while (win->arr[0][j])
+	{
+		j++;
+	}
+	win->leng = j;
+}
+
 void	game_over(t_mlx *win)
 {
-    char	*path;
-    int		image_width;
-    int		image_height;
-	long long int 	i = 20000;
+	char			*path;
+	int				image_width;
+	int				image_height;
+	long long int	i;
+	int				center_x;
+	int				center_y;
 
-	
+	i = 30000;
 	win->over = true;
 	path = "textures/gameover.xpm";
-    image_width = 640;
-    image_height = 360;
-    win->over_img = mlx_xpm_file_to_image(win->mlx, path, &image_width,
-            &image_height);
-    mlx_clear_window(win->mlx, win->mlx_win);
+	image_width = 640;
+	image_height = 360;
+	win->over_img = mlx_xpm_file_to_image(win->mlx, path, &image_width,
+			&image_height);
+	mlx_clear_window(win->mlx, win->mlx_win);
+	length(win);
+	center_x = win->leng * 64 / 2 - image_width / 2;
+	center_y = win->heng * 64 / 2 - image_height / 2;
 	while (i > 0)
 	{
-    	mlx_put_image_to_window(win->mlx, win->mlx_win, win->over_img, 0, 0); 
+		mlx_put_image_to_window(win->mlx, win->mlx_win, win->over_img, center_x,
+			center_y);
 		i--;
 	}
-    mlx_loop_hook(win->mlx, NULL, NULL);
+	mlx_loop_hook(win->mlx, NULL, NULL);
 	exit(0);
 }
 
@@ -542,7 +576,9 @@ int	bullet_shooting(t_mlx *win)
 							win->bullet_img[1], (j - 1) * 64, i * 64);
 						frame = 0;
 					}
-					else if (win->arr[i][j - 1] == 'P' && j > 0)
+					else if ((win->arr[i + 1][j] == 'P' || win->arr[i
+							- 1][j] == 'P' || win->arr[i][j - 1] == 'P'
+							|| win->arr[i][j + 1] == 'P') && j > 0)
 					{
 						game_over(win);
 					}
@@ -553,6 +589,7 @@ int	bullet_shooting(t_mlx *win)
 						mlx_put_image_to_window(win->mlx, win->mlx_win,
 							win->bullet_img[0], initial_j * 64, initial_i * 64);
 						frame = 0;
+						win->wall = true;
 					}
 					if (win->over == false)
 					{
@@ -572,14 +609,14 @@ int	bullet_shooting(t_mlx *win)
 		}
 		i++;
 	}
-	if (counter % 300 == 0 && win->exit == false)
+	if (counter % 400 == 0 && win->exit == false)
 	{
 		frame = (frame + 1) % 7;
 		mlx_put_image_to_window(win->mlx, win->mlx_win, win->bullet_img[frame],
 			bullet_j * 64, bullet_i * 64);
 		counter = 0;
 	}
-	else if (win->exit == true && counter % 550 == 0)
+	else if (win->exit == true && counter % 750 == 0)
 	{
 		frame = (frame + 1) % 7;
 		mlx_put_image_to_window(win->mlx, win->mlx_win, win->bullet_img[frame],
@@ -616,7 +653,7 @@ int	display_troop(t_mlx *win)
 		}
 		i++;
 	}
-	if (counter % 1000 == 0)
+	if (counter % 1500 == 0)
 	{
 		current_frame = (current_frame + 1) % 8;
 		counter = 0;
@@ -694,6 +731,33 @@ int	display_next_frame_and_door(t_mlx *win)
 	return (0);
 }
 
+void	load_count(t_mlx *win)
+{
+	char	*move_count_str;
+	char	*move_str;
+	int		x;
+	int		y;
+
+	x = win->leng * 64;
+	y = 0;
+	while (y < 30)
+	{
+		x = win->leng * 64;
+		while (x < win->leng * 64 + 200)
+		{
+			mlx_pixel_put(win->mlx, win->mlx_win, x, y, 0x654321);
+			x++;
+		}
+		y++;
+	}
+	move_str = ft_itoa(win->count1122);
+	move_count_str = ft_strjoin("Move count: ", move_str);
+	mlx_string_put(win->mlx, win->mlx_win, win->leng * 64 + 10, 20, 0xFFFFFF,
+		move_count_str);
+	free(move_str);
+	free(move_count_str);
+}
+
 void	update_position(t_mlx *win, int key_code, char **arr)
 {
 	int		i;
@@ -744,6 +808,8 @@ void	update_position(t_mlx *win, int key_code, char **arr)
 						mlx_put_image_to_window(win->mlx, win->mlx_win,
 							win->character_img_l, (j - 1) * 64, i * 64);
 					}
+					win->count1122 += 1;
+					load_count(win);
 					return ;
 				}
 				else if (key_code == D && j < (win->width - 1) && arr[i][j
@@ -767,10 +833,12 @@ void	update_position(t_mlx *win, int key_code, char **arr)
 						mlx_put_image_to_window(win->mlx, win->mlx_win,
 							win->character_img_r, (j + 1) * 64, i * 64);
 					}
+					win->count1122 += 1;
+					load_count(win);
 					return ;
 				}
 				else if (key_code == S && arr[i + 1][j] != '1' && arr[i
-					+ 1][j] != 'T' && arr[i][j + 1] != 'B')
+					+ 1][j] != 'T' && arr[i + 1][j] != 'B')
 				{
 					if (win->exit == false && arr[i + 1][j] != 'E')
 					{
@@ -790,32 +858,33 @@ void	update_position(t_mlx *win, int key_code, char **arr)
 						mlx_put_image_to_window(win->mlx, win->mlx_win,
 							win->character_img_ur, j * 64, (i + 1) * 64);
 					}
+					win->count1122 += 1;
+					load_count(win);
 					return ;
 				}
-				else if (key_code == W)
+				else if (key_code == W && i > 0 && arr[i - 1][j] != '1' && arr[i
+					- 1][j] != 'T' && arr[i - 1][j] != 'B')
 				{
-					if (i > 0 && arr[i - 1][j] != '1' && arr[i - 1][j] != 'T'
-						&& arr[i - 1][j] != 'B')
+					if (win->exit == false && arr[i - 1][j] != 'E')
 					{
-						if (win->exit == false && arr[i - 1][j] != 'E')
-						{
-							arr[i][j] = '0';
-							arr[i - 1][j] = 'P';
-							mlx_put_image_to_window(win->mlx, win->mlx_win,
-								win->background_img, j * 64, i * 64);
-							mlx_put_image_to_window(win->mlx, win->mlx_win,
-								win->character_img_ur, j * 64, (i - 1) * 64);
-						}
-						else if (win->exit == true)
-						{
-							arr[i][j] = '0';
-							arr[i - 1][j] = 'P';
-							mlx_put_image_to_window(win->mlx, win->mlx_win,
-								win->background_img, j * 64, i * 64);
-							mlx_put_image_to_window(win->mlx, win->mlx_win,
-								win->character_img_ur, j * 64, (i - 1) * 64);
-						}
+						arr[i][j] = '0';
+						arr[i - 1][j] = 'P';
+						mlx_put_image_to_window(win->mlx, win->mlx_win,
+							win->background_img, j * 64, i * 64);
+						mlx_put_image_to_window(win->mlx, win->mlx_win,
+							win->character_img_ur, j * 64, (i - 1) * 64);
 					}
+					else if (win->exit == true)
+					{
+						arr[i][j] = '0';
+						arr[i - 1][j] = 'P';
+						mlx_put_image_to_window(win->mlx, win->mlx_win,
+							win->background_img, j * 64, i * 64);
+						mlx_put_image_to_window(win->mlx, win->mlx_win,
+							win->character_img_ur, j * 64, (i - 1) * 64);
+					}
+					win->count1122 += 1;
+					load_count(win);
 					return ;
 				}
 			}
@@ -1077,8 +1146,9 @@ int	main(int argc, char **argv)
 	t_mlx	win;
 	char	**arr;
 	char	*relative_path;
-	
+
 	win.over = false;
+	win.count1122 = 0;
 	relative_path = "textures/Background.xpm";
 	int valid, validate;
 	if (validate_args(argc, argv, &win))
@@ -1102,6 +1172,7 @@ int	main(int argc, char **argv)
 		display_bullet(&win);
 		get_cooridnates_sprts(arr, &win);
 		setup_hooks(&win);
+		load_count(&win);
 		mlx_loop(win.mlx);
 	}
 	return (0);

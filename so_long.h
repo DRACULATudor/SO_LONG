@@ -6,7 +6,7 @@
 /*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 11:41:36 by tlupu             #+#    #+#             */
-/*   Updated: 2024/04/09 17:25:27 by tlupu            ###   ########.fr       */
+/*   Updated: 2024/04/10 16:29:41 by tlupu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,12 @@ typedef struct s_mlx
 	int		bullet_x;
 	int		bullet_y;
 	int		leng;
-	int 	count1122;
+	int		count1122;
 	int		heng;
+	int 	last_row;
+	int 	last_col;
 	bool	path;
-	bool 	number;
+	bool	number;
 	bool	wall;
 	bool	exit;
 	bool	flag;
@@ -86,5 +88,9 @@ void		*ft_memcpy(void *dst, const void *src, size_t len);
 int			ft_strleng(char *str);
 int			close_event(t_mlx *win);
 char		*ft_itoa(int n);
+int			validate_map_features_custom(char **arr);
+int		validate_map_features(char **arr, t_mlx *win);
+int     error_fct(int num);
+
 
 #endif

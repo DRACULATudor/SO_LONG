@@ -6,7 +6,7 @@
 #    By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/15 16:47:59 by tlupu             #+#    #+#              #
-#    Updated: 2024/04/04 17:53:15 by tlupu            ###   ########.fr        #
+#    Updated: 2024/04/10 16:03:44 by tlupu            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ GET_NEXT_LINE = get_next_line.a
 GNL_DIR = get_next_line
 SRCS = so_long.c utils.c
 OBJS = $(SRCS:.c=.o)
-BONUS = so_long_bonus.c utils.c
+BONUS = so_long_bonus.c utils.c map_validate/map_features.c errors/errors.c 
 OBJSBON = $(BONUS:.c=.o)
 
 %.o: %.c

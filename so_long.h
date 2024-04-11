@@ -6,7 +6,7 @@
 /*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 11:41:36 by tlupu             #+#    #+#             */
-/*   Updated: 2024/04/10 16:29:41 by tlupu            ###   ########.fr       */
+/*   Updated: 2024/04/11 18:10:29 by tlupu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ typedef struct s_mlx
 	int		leng;
 	int		count1122;
 	int		heng;
-	int 	last_row;
-	int 	last_col;
+	int		last_row;
+	int		last_col;
 	bool	path;
 	bool	number;
 	bool	wall;
@@ -89,8 +89,35 @@ int			ft_strleng(char *str);
 int			close_event(t_mlx *win);
 char		*ft_itoa(int n);
 int			validate_map_features_custom(char **arr);
-int		validate_map_features(char **arr, t_mlx *win);
-int     error_fct(int num);
-
+int			validate_map_features(char **arr, t_mlx *win);
+int			error_fct(int num);
+void		put_collectable(t_mlx *win);
+void		display_door(t_mlx *win);
+int			display_troop(t_mlx *win);
+void		put_troop(t_mlx *win);
+void		display_bullet(t_mlx *win);
+int			ft_strleng(char *str);
+int			ft_count_num(int n);
+void		*ft_memset(void *b, int c, size_t len);
+bool		check_for_colectables(t_mlx *win);
+void		game_over(t_mlx *win);
+int			get_p_x(char **map);
+int			get_p_y(char **map);
+int			get_e_x(char **map);
+int			get_e_y(char **map);
+int			get_b_y(char **map);
+int			get_b_x(char **map);
+void		length(t_mlx *win);
+char		*ft_strcpy(char *dst, char *src);
+void		free_arr(char **arr);
+char		**error_fctc(int num);
+char		**fill_map_arr(char *filename);
+char		**allocate_new_arr(char **arr, int i);
+void		draw_map(char **arr, t_mlx *win);
+void		load_images(t_mlx *win, int img_width, int img_height);
+void		get_cooridnates_sprts(char **arr, t_mlx *win);
+int			bullet_shooting(t_mlx *win);
+void		update_bullet_position(t_mlx *win, int i, int j, int *frame);
+int			display_next_frame_and_door(t_mlx *win);
 
 #endif

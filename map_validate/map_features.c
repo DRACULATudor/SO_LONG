@@ -6,7 +6,7 @@
 /*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 15:48:11 by tlupu             #+#    #+#             */
-/*   Updated: 2024/04/10 16:49:38 by tlupu            ###   ########.fr       */
+/*   Updated: 2024/04/11 15:47:44 by tlupu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,26 +57,39 @@ int	validate_map_features_custom(char **arr)
 }
 
 
-void calculate_index(t_mlx *win, char **arr)
+
+int calculate_width(char **arr, t_mlx *win)
 {
-    int i;
     int j;
+    int last_column_index;
 
     j = 0;
+    last_column_index = 0;
     while (arr[0][j] != '\0')
-	{
-		last_column_index = j;
-		j++;
-	}
-	j--;
-	win->width = j;
+    {
+        last_column_index = j;
+        j++;
+    }
+    j--;
+    win->width = j;
 	last_column_index--;
-	while (arr[i] != NULL)
-	{
-		last_row_index = i;
-		i++;
-	}
-	win->height = last_row_index + 1;
+	return(last_column_index);
+}
+
+int calculate_height(char **arr, t_mlx *win)
+{
+    int i;
+    int last_row_index;
+
+    i = 0;
+    last_row_index = 0;
+    while (arr[i] != NULL)
+    {
+        last_row_index = i;
+        i++;
+    }
+    win->height = last_row_index + 1;
+	return(last_row_index);
 }
 
 int	validate_map_element(char **arr, t_mlx *win)
@@ -87,24 +100,8 @@ int	validate_map_element(char **arr, t_mlx *win)
 	int	last_row_index;
 	int	last_column_index;
 
-	i = 0;
-	j = 0;
-	last_row_index = 0;
-	last_column_index = 0;
-	while (arr[0][j] != '\0')
-	{
-		last_column_index = j;
-		j++;
-	}
-	j--;
-	win->width = j;
-	last_column_index--;
-	while (arr[i] != NULL)
-	{
-		last_row_index = i;
-		i++;
-	}
-	win->height = last_row_index + 1;
+	last_row_index = calculate_height(arr, win);
+	last_column_index = calculate_width(arr, win);
 	j = 0;
 	while (j <= last_column_index)
 	{

@@ -6,7 +6,7 @@
 /*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 15:56:42 by tlupu             #+#    #+#             */
-/*   Updated: 2024/04/10 16:01:16 by tlupu            ###   ########.fr       */
+/*   Updated: 2024/04/11 16:48:37 by tlupu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,4 +17,11 @@ int     error_fct(int num)
     num = 1;
     write(2,"Error\n", 7);
     return(num);
+}
+
+char**   error_fctc(int num)
+{
+    num = 1;
+    write(2, "Error\n", 7);
+    return(NULL);
 }

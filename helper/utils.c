@@ -6,11 +6,11 @@
 /*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 14:59:42 by tlupu             #+#    #+#             */
-/*   Updated: 2024/04/09 15:57:05 by tlupu            ###   ########.fr       */
+/*   Updated: 2024/04/11 17:06:02 by tlupu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
 int ft_strleng(char *str)
 {

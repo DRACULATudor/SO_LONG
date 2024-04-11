@@ -6,7 +6,7 @@
 #    By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/15 16:47:59 by tlupu             #+#    #+#              #
-#    Updated: 2024/04/10 16:03:44 by tlupu            ###   ########.fr        #
+#    Updated: 2024/04/11 18:06:51 by tlupu            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,11 +16,13 @@ MLX_DIR = mlx_linux
 MLX_LIB = libmlx.a
 GET_NEXT_LINE = get_next_line.a
 GNL_DIR = get_next_line
-SRCS = so_long.c utils.c
+SRCS = so_long.c helper/utils.c 
 OBJS = $(SRCS:.c=.o)
-BONUS = so_long_bonus.c utils.c map_validate/map_features.c errors/errors.c 
 OBJSBON = $(BONUS:.c=.o)
-
+BONUS = so_long_bonus.c helper/utils.c map_validate/map_features.c errors/errors.c load_textures/textures.c \
+		helper/utils1.c helper/utils2.c map_fill_cordinates/map_coordinates.c game_features/features.c game_features/shooting.c\
+		game_features/door.c
+		
 %.o: %.c
 	$(CC) -Wall -Wextra -Werror -Imlx -c $< -o $@ 
 
@@ -38,13 +40,11 @@ $(MLX_DIR)/$(MLX_LIB):
 $(GNL_DIR)/$(GET_NEXT_LINE):
 	$(MAKE) -C $(GNL_DIR)
 
-
-
-
 clean:
 	$(MAKE)	clean -C $(MLX_DIR)
 	$(MAKE)	clean -C $(GNL_DIR)
-	rm -f	$(OBJS)
+	rm -f	$(OBJS) 
+	rm -f 	$(OBJSBON)
 
 fclean:	clean
 	rm -f $(NAME)

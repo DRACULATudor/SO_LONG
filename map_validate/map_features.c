@@ -12,31 +12,6 @@
 
 #include "../so_long.h"
 
-void	count_map_features(char **arr, int *pande, int *c, int *enemy)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (arr[i] != NULL)
-	{
-		j = 0;
-		while (arr[i][j] != '\0')
-		{
-			if (arr[i][j] == 'E' || arr[i][j] == 'P')
-				(*pande)++;
-			else if (arr[i][j] == 'C')
-				(*c)++;
-			else if (arr[i][j] == 'T' || arr[i][j] == 'B')
-				(*enemy)++;
-			if (arr[i][j] == 'T' && arr[i][j - 1] != 'B')
-				return ;
-			j++;
-		}
-		i++;
-	}
-}
-
 int	validate_map_features_custom(char **arr)
 {
 	int	pande;
@@ -55,8 +30,6 @@ int	validate_map_features_custom(char **arr)
 		return (error_fct(enemy));
 	return (0);
 }
-
-
 
 int calculate_width(char **arr, t_mlx *win)
 {

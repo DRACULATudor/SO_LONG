@@ -93,14 +93,14 @@ int	bullet_shooting(t_mlx *win)
 
 	iterate_through_map(win, &bullet_i, &bullet_j, &initial_i, &initial_j,
 		&frame);
-	if (counter % 400 == 0 && win->exit == false)
+	if (counter % 150 == 0 && win->exit == false)
 	{
 		frame = (frame + 1) % 7;
 		mlx_put_image_to_window(win->mlx, win->mlx_win, win->bullet_img[frame],
 			bullet_j * 64, bullet_i * 64);
 		counter = 0;
 	}
-	else if (win->exit == true && counter % 750 == 0)
+	else if (win->exit == true && counter % 150 == 0)
 	{
 		frame = (frame + 1) % 7;
 		mlx_put_image_to_window(win->mlx, win->mlx_win, win->bullet_img[frame],

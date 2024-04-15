@@ -75,7 +75,7 @@ int display_troop(t_mlx *win)
 
     display_troop_image(win, current_frame);
 
-    if (counter % 1500 == 0)
+    if (counter % 400 == 0)
     {
         current_frame = (current_frame + 1) % 7;
         counter = 0;

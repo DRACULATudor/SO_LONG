@@ -21,10 +21,11 @@ OBJS = $(SRCS:.c=.o)
 OBJSBON = $(BONUS:.c=.o)
 BONUS = so_long_bonus.c helper/utils.c map_validate/map_features.c errors/errors.c load_textures/textures.c \
 		helper/utils1.c helper/utils2.c map_fill_cordinates/map_coordinates.c game_features/features.c game_features/shooting.c\
-		game_features/door.c
+		game_features/door.c game_features/movement.c game_features/movement2.c helper/utils3.c\
+		map_fill_cordinates/more_checks.c game_features/rendering.c \
 		
 %.o: %.c
-	$(CC) -Wall -Wextra -Werror -Imlx -c $< -o $@ 
+	$(CC) -Wall -Wextra -Werror -Imlx -c $< -o $@ -g
 
 all: $(NAME)
 

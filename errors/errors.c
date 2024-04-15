@@ -23,5 +23,17 @@ char**   error_fctc(int num)
 {
     num = 1;
     write(2, "Error\n", 7);
+    num = num - 1;
     return(NULL);
+}
+
+void    free_all(char **arr)
+{
+    int i = 0;
+    while (arr[i])
+    {
+        free(arr[i]);
+        i++;
+    }
+    free(arr);
 }

@@ -6,7 +6,7 @@
 /*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 15:48:11 by tlupu             #+#    #+#             */
-/*   Updated: 2024/04/11 15:47:44 by tlupu            ###   ########.fr       */
+/*   Updated: 2024/04/16 16:42:03 by tlupu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,38 +31,38 @@ int	validate_map_features_custom(char **arr)
 	return (0);
 }
 
-int calculate_width(char **arr, t_mlx *win)
+int	calculate_width(char **arr, t_mlx *win)
 {
-    int j;
-    int last_column_index;
+	int	j;
+	int	last_column_index;
 
-    j = 0;
-    last_column_index = 0;
-    while (arr[0][j] != '\0')
-    {
-        last_column_index = j;
-        j++;
-    }
-    j--;
-    win->width = j;
+	j = 0;
+	last_column_index = 0;
+	while (arr[0][j] != '\0')
+	{
+		last_column_index = j;
+		j++;
+	}
+	j--;
+	win->width = j;
 	last_column_index--;
-	return(last_column_index);
+	return (last_column_index);
 }
 
-int calculate_height(char **arr, t_mlx *win)
+int	calculate_height(char **arr, t_mlx *win)
 {
-    int i;
-    int last_row_index;
+	int	i;
+	int	last_row_index;
 
-    i = 0;
-    last_row_index = 0;
-    while (arr[i] != NULL)
-    {
-        last_row_index = i;
-        i++;
-    }
-    win->height = last_row_index + 1;
-	return(last_row_index);
+	i = 0;
+	last_row_index = 0;
+	while (arr[i] != NULL)
+	{
+		last_row_index = i;
+		i++;
+	}
+	win->height = last_row_index + 1;
+	return (last_row_index);
 }
 
 int	validate_map_element(char **arr, t_mlx *win)
@@ -86,7 +86,6 @@ int	validate_map_element(char **arr, t_mlx *win)
 	while (i <= last_row_index)
 	{
 		if (arr[i][0] != '1' || arr[i][last_column_index] != '1')
-
 			return (error_fct(1));
 		i++;
 	}

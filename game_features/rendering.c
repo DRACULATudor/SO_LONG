@@ -4,14 +4,16 @@
 int	close_event(t_mlx *win)
 {
 	close_events(win);
-	return(0);
+	return (0);
 }
 
-void	setup_mlx(t_mlx *win, char *relative_path)
+void	setup_mlx(t_mlx *win)
 {
 	int	img_width;
 	int	img_height;
+	char *relative_path;
 
+	relative_path = "textures/Background.xpm";
 	img_width = 64;
 	img_height = 64;
 	win->mlx = mlx_init();

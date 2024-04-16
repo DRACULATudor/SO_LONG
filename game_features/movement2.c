@@ -27,43 +27,33 @@ void	load_count(t_mlx *win)
 	free(move_count_str);
 }
 
+void	load_image(t_mlx *win, void **img, char *path)
+{
+	int	img_width;
+	int	img_height;
+
+	img_width = 64;
+	img_height = 64;
+	if (*img)
+	{
+		mlx_destroy_image(win->mlx, *img);
+		*img = NULL;
+	}
+	*img = mlx_xpm_file_to_image(win->mlx, path, &img_width, &img_height);
+}
+
 void	load_imagess(t_mlx *win)
 {
-	int		img_width;
-	int		img_height;
 	char	*path_ml;
 	char	*path_r;
 	char	*path_C;
 
-	img_width = 64;
-	img_height = 64;
 	path_ml = "textures/character/CharacterMoreRight.xpm";
 	path_r = "textures/character/CharacterLeft.xpm";
 	path_C = "textures/character/CharacterCenter.xpm";
-
-	if (win->character_img_l)
-	{
-		mlx_destroy_image(win->mlx, win->character_img_l);
-		win->character_img_l = NULL;
-	}
-	win->character_img_l = mlx_xpm_file_to_image(win->mlx, path_ml, &img_width,
-			&img_height);
-
-	if (win->character_img_r)
-	{
-		mlx_destroy_image(win->mlx, win->character_img_r);
-		win->character_img_r = NULL;
-	}
-	win->character_img_r = mlx_xpm_file_to_image(win->mlx, path_r, &img_width,
-			&img_height);
-
-	if (win->character_img_ur)
-	{
-		mlx_destroy_image(win->mlx, win->character_img_ur);
-		win->character_img_ur = NULL;
-	}
-	win->character_img_ur = mlx_xpm_file_to_image(win->mlx, path_C, &img_width,
-			&img_height);
+	load_image(win, &(win->character_img_l), path_ml);
+	load_image(win, &(win->character_img_r), path_r);
+	load_image(win, &(win->character_img_ur), path_C);
 }
 
 int	key_hook(int key_code, t_mlx *win)

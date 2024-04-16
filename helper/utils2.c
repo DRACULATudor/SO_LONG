@@ -6,7 +6,7 @@
 /*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 16:23:50 by tlupu             #+#    #+#             */
-/*   Updated: 2024/04/11 16:25:38 by tlupu            ###   ########.fr       */
+/*   Updated: 2024/04/16 15:13:49 by tlupu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,15 +61,11 @@ void	length(t_mlx *win)
 
 	i = 0;
 	while (win->arr[i] != NULL)
-	{
 		i++;
-	}
 	win->heng = i;
 	j = 0;
 	while (win->arr[0][j])
-	{
 		j++;
-	}
 	win->leng = j;
 }
 

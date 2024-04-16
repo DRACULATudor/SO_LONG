@@ -6,19 +6,20 @@
 /*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 14:59:42 by tlupu             #+#    #+#             */
-/*   Updated: 2024/04/11 17:06:02 by tlupu            ###   ########.fr       */
+/*   Updated: 2024/04/16 16:28:56 by tlupu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-int ft_strleng(char *str)
+int	ft_strleng(char *str)
 {
-	int i;
+	int	i;
+
 	i = 0;
 	while (str[i] != '\0' && str[i] != '\n')
 		i++;
-	return(i);
+	return (i);
 }
 
 int	ft_count_num(int n)
@@ -66,8 +67,6 @@ void	*ft_calloc(size_t count, size_t size)
 	ft_memset(ptr, 0, i);
 	return (ptr);
 }
-
-
 
 char	*ft_itoa(int n)
 {
@@ -125,7 +124,7 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	return (dst);
 }
 
-void   *ft_memcpy(void *dst, const void *src, size_t len)
+void	*ft_memcpy(void *dst, const void *src, size_t len)
 {
-    return(ft_memmove(dst, src, len));
+	return (ft_memmove(dst, src, len));
 }

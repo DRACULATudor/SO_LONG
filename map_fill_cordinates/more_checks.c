@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   more_checks.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/16 16:19:54 by tlupu             #+#    #+#             */
+/*   Updated: 2024/04/16 16:41:45 by tlupu            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../so_long.h"
 
 void	fill(char **tab, t_point size, t_point begin, char to_fill[])
@@ -11,7 +23,6 @@ void	fill(char **tab, t_point size, t_point begin, char to_fill[])
 	i = 0;
 	while (i < 4)
 	{
-
 		if (c == to_fill[i])
 		{
 			tab[begin.y][begin.x] = 'X';
@@ -41,7 +52,7 @@ int	check_if_c_e_p(char **map2)
 			if (map2[i][j] == 'P' || map2[i][j] == 'C' || map2[i][j] == 'E')
 			{
 				free_arr(map2);
-				return(error_fct(1));
+				exit(1);
 			}
 			j++;
 		}
@@ -56,7 +67,7 @@ int	check_valid(char **map, int x, int y, int map_width, int map_height)
 	int		i;
 	int		valid;
 	t_point	begin;
-	char	to_fill[6];
+	char	to_fill[4];
 	char	**map2;
 
 	to_fill[0] = 'P';
@@ -66,8 +77,6 @@ int	check_valid(char **map, int x, int y, int map_width, int map_height)
 	size.x = map_width;
 	size.y = map_height;
 	i = -1;
-	begin.x = 0;
-	begin.y = 0;
 	begin.x = x;
 	begin.y = y;
 	map2 = malloc(sizeof(char *) * (map_height + 1));
@@ -75,9 +84,9 @@ int	check_valid(char **map, int x, int y, int map_width, int map_height)
 		map2[i] = ft_strcpy(map2[i], map[i]);
 	map2[i] = NULL;
 	fill(map2, size, begin, to_fill);
-	i = 0;
 	valid = check_if_c_e_p(map2);
-	free_all(map2);
+	if (map2)
+		free_arr(map2);
 	return (valid);
 }
 

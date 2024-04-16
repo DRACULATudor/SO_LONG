@@ -1,9 +1,9 @@
 #include "../so_long.h"
 
-void count_map_features(char **arr, int *pande, int *c, int *enemy)
+void	count_map_features(char **arr, int *pande, int *c, int *enemy)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (arr[i] != NULL)
@@ -18,14 +18,14 @@ void count_map_features(char **arr, int *pande, int *c, int *enemy)
 			else if (arr[i][j] == 'T' || arr[i][j] == 'B')
 				(*enemy)++;
 			if (arr[i][j] == 'T' && arr[i][j - 1] != 'B')
-				return;
+				return ;
 			j++;
 		}
 		i++;
 	}
 }
 
-void init_struct(t_mlx *win)
+void	init_struct(t_mlx *win)
 {
 	win->dor_y = 0;
 	win->dor_x = 0;
@@ -53,12 +53,8 @@ void init_struct(t_mlx *win)
 	win->arr = NULL;
 }
 
-void init_struct2(t_mlx *win)
+void	init_images(t_mlx *win)
 {
-	int i;
-
-	win->mlx = NULL;
-	win->mlx_win = NULL;
 	win->bullet = NULL;
 	win->test_img = NULL;
 	win->charcaterimg = NULL;
@@ -68,35 +64,45 @@ void init_struct2(t_mlx *win)
 	win->over_img = NULL;
 	win->colectableimg = NULL;
 	win->background_img = NULL;
+}
 
-	i = 0;
+void	init_enemy_and_bullet(t_mlx *win)
+{
+	int	i = 0;
+
 	while (i < 8)
 	{
 		win->enemy[i] = NULL;
 		if (i < 7)
-		{
 			win->bullet_img[i] = NULL;
-		}
-		i++;
-	}
-	i = 0;
-	while (i < 6)
-	{
-		win->door_imgs[i] = NULL;
-		i++;
-	}
-	i = 0;
-	while (i < 8)
-	{
-		win->coin_imgs[i] = NULL;
 		i++;
 	}
 }
 
-void close_events(t_mlx *win)
+void	init_door_and_coin(t_mlx *win)
 {
-	int i;
-	i = 0;
+	int	i = -1;
+
+	while (++i < 6)
+		win->door_imgs[i] = NULL;
+	i = -1;
+	while (++i < 8)
+		win->coin_imgs[i] = NULL;
+}
+
+void	init_struct2(t_mlx *win)
+{
+	win->mlx = NULL;
+	win->mlx_win = NULL;
+	init_images(win);
+	init_enemy_and_bullet(win);
+	init_door_and_coin(win);
+}
+
+void	destroy_enemy_and_bullet(t_mlx *win)
+{
+	int	i = 0;
+
 	while (i < 8)
 	{
 		if (win->enemy[i])
@@ -111,7 +117,12 @@ void close_events(t_mlx *win)
 		}
 		i++;
 	}
-	i = 0;
+}
+
+void	destroy_door_and_coin(t_mlx *win)
+{
+	int	i = 0;
+
 	while (i < 6)
 	{
 		if (win->door_imgs[i])
@@ -131,30 +142,29 @@ void close_events(t_mlx *win)
 		}
 		i++;
 	}
+}
+
+void	destroy_image(t_mlx *win)
+{
 	if (win->charcaterimg)
-	{
 		mlx_destroy_image(win->mlx, win->charcaterimg);
-	}
 	if (win->character_img_l)
-	{
 		mlx_destroy_image(win->mlx, win->character_img_l);
-	}
 	if (win->character_img_r)
-	{
 		mlx_destroy_image(win->mlx, win->character_img_r);
-	}
 	if (win->character_img_ur)
-	{
 		mlx_destroy_image(win->mlx, win->character_img_ur);
-	}
 	if (win->background_img)
-	{
 		mlx_destroy_image(win->mlx, win->background_img);
-	}
 	if (win->colectableimg)
-	{
 		mlx_destroy_image(win->mlx, win->colectableimg);
-	}
+}
+
+void	close_events(t_mlx *win)
+{
+	destroy_enemy_and_bullet(win);
+	destroy_door_and_coin(win);
+	destroy_image(win);
 	if (win->mlx_win)
 	{
 		mlx_destroy_window(win->mlx, win->mlx_win);

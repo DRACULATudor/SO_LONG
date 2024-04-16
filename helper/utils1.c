@@ -6,7 +6,7 @@
 /*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 16:18:44 by tlupu             #+#    #+#             */
-/*   Updated: 2024/04/11 16:20:46 by tlupu            ###   ########.fr       */
+/*   Updated: 2024/04/16 16:29:18 by tlupu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,7 @@ bool	check_for_colectables(t_mlx *win)
 		while (win->arr[i][j] != '\0')
 		{
 			if (win->arr[i][j] == 'C')
-			{
 				return (false);
-			}
 			j++;
 		}
 		i++;
@@ -99,8 +97,8 @@ int	get_e_x(char **map)
 
 int	get_e_y(char **map)
 {
-	int	x;
-	int	y;
+	int x;
+	int y;
 
 	x = 0;
 	y = 0;

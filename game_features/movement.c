@@ -6,7 +6,7 @@
 /*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:01:12 by tlupu             #+#    #+#             */
-/*   Updated: 2024/04/16 13:48:10 by tlupu            ###   ########.fr       */
+/*   Updated: 2024/04/16 16:23:55 by tlupu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ void	move_up(t_mlx *win, char **arr, int i, int j)
 
 void	move_down(t_mlx *win, char **arr, int i, int j)
 {
-	if (arr[i + 1][j] != '1'  && arr[i + 1][j] != 'B' && arr[i + 1][j] != 'T')
+	if (arr[i + 1][j] != '1' && arr[i + 1][j] != 'B' && arr[i + 1][j] != 'T')
 	{
 		if (win->exit == false && arr[i + 1][j] != 'E')
 		{
@@ -155,8 +155,8 @@ void	update_position(t_mlx *win, int key_code, char **arr)
 	i = -1;
 	while (arr[++i] != NULL)
 	{
-		j = 0;
-		while (arr[i][j] != '\0')
+		j = -1;
+		while (arr[i][++j] != '\0')
 		{
 			if (arr[i][j] == 'P')
 			{
@@ -171,7 +171,6 @@ void	update_position(t_mlx *win, int key_code, char **arr)
 				destroy_images(win);
 				return ;
 			}
-			j++;
 		}
 	}
 }

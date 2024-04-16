@@ -6,7 +6,7 @@
 /*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 11:41:36 by tlupu             #+#    #+#             */
-/*   Updated: 2024/04/15 14:37:05 by tlupu            ###   ########.fr       */
+/*   Updated: 2024/04/16 16:51:09 by tlupu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ void	count_map_features(char **arr, int *pande, int *c, int *enemy);
 int	check_valid(char **map, int x, int y, int map_width, int map_height);
 int	check_map(char **map);
 int	validate_args(int argc, char **argv, t_mlx *win);
-void	setup_mlx(t_mlx *win, char *relative_path);
+void	setup_mlx(t_mlx *win);
 int	close_event(t_mlx *win);
 void	draw_background(t_mlx *win);
 int	display_all(t_mlx *win);

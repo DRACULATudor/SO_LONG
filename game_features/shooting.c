@@ -6,13 +6,11 @@
 /*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 17:25:41 by tlupu             #+#    #+#             */
-/*   Updated: 2024/04/11 17:41:32 by tlupu            ###   ########.fr       */
+/*   Updated: 2024/04/16 14:25:14 by tlupu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
-
-
 
 void	check_game_over(t_mlx *win, int i, int j)
 {
@@ -85,7 +83,7 @@ void	iterate_through_map(t_mlx *win, int *bullet_i, int *bullet_j,
 int	bullet_shooting(t_mlx *win)
 {
 	static int	counter;
-	static int	frame;
+	static int	frame = 0;
 	static int	bullet_i = -1;
 	static int	bullet_j = -1;
 	static int	initial_i = -1;
@@ -93,14 +91,14 @@ int	bullet_shooting(t_mlx *win)
 
 	iterate_through_map(win, &bullet_i, &bullet_j, &initial_i, &initial_j,
 		&frame);
-	if (counter % 150 == 0 && win->exit == false)
+	if (counter % 700 == 0 && win->exit == false)
 	{
 		frame = (frame + 1) % 7;
 		mlx_put_image_to_window(win->mlx, win->mlx_win, win->bullet_img[frame],
 			bullet_j * 64, bullet_i * 64);
 		counter = 0;
 	}
-	else if (win->exit == true && counter % 150 == 0)
+	else if (win->exit == true && counter % 880 == 0)
 	{
 		frame = (frame + 1) % 7;
 		mlx_put_image_to_window(win->mlx, win->mlx_win, win->bullet_img[frame],

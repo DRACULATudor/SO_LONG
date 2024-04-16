@@ -6,12 +6,12 @@
 #    By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/15 16:47:59 by tlupu             #+#    #+#              #
-#    Updated: 2024/04/11 18:06:51 by tlupu            ###   ########.fr        #
+#    Updated: 2024/04/15 14:19:27 by tlupu            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
-CC = cc
+CC = cc -g
 MLX_DIR = mlx_linux
 MLX_LIB = libmlx.a
 GET_NEXT_LINE = get_next_line.a
@@ -25,7 +25,7 @@ BONUS = so_long_bonus.c helper/utils.c map_validate/map_features.c errors/errors
 		map_fill_cordinates/more_checks.c game_features/rendering.c \
 		
 %.o: %.c
-	$(CC) -Wall -Wextra -Werror -Imlx -c $< -o $@ -g
+	$(CC) -Wall -Wextra -Werror -g -Imlx -c $< -o $@
 
 all: $(NAME)
 

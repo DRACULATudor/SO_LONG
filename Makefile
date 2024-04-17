@@ -6,7 +6,7 @@
 #    By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/15 16:47:59 by tlupu             #+#    #+#              #
-#    Updated: 2024/04/17 16:27:29 by tlupu            ###   ########.fr        #
+#    Updated: 2024/04/17 19:41:21 by tlupu            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,10 @@ MLX_DIR = mlx_linux
 MLX_LIB = libmlx.a
 GET_NEXT_LINE = get_next_line.a
 GNL_DIR = get_next_line
-SRCS = so_long.c mandatory/game/game_disp_sprites.c mandatory/game/game_move_charact.c mandatory/game/rendering.c
+SRCS = so_long.c mandatory/game/game_disp_sprites.c mandatory/game/game_move_charact.c mandatory/game/rendering.c mandatory/helper/utils.c \
+		mandatory/helper/utils2.c mandatory/helper/utils3.c mandatory/load_textures/textures.c mandatory/map_arr/map_make.c \
+		mandatory/map_checks/map_checks.c mandatory/map_checks/path_checks.c \
+
 OBJS = $(SRCS:.c=.o)
 OBJSBON = $(BONUS:.c=.o)
 BONUS = so_long_bonus.c bonus/helper/utils.c bonus/map_validate/map_features.c bonus/errors/errors.c bonus/load_textures/textures.c \

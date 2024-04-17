@@ -6,7 +6,7 @@
 /*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 16:57:33 by tlupu             #+#    #+#             */
-/*   Updated: 2024/04/17 16:15:23 by tlupu            ###   ########.fr       */
+/*   Updated: 2024/04/17 19:41:41 by tlupu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void init_structs(t_mlx *win)
 int main(int argc, char **argv)
 {
     t_mlx win;
-    char *relative_path = "textures/Background.xpm";
     int valid, validate;
 
 	init_structs(&win);

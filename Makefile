@@ -6,7 +6,7 @@
 #    By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/15 16:47:59 by tlupu             #+#    #+#              #
-#    Updated: 2024/04/15 14:19:27 by tlupu            ###   ########.fr        #
+#    Updated: 2024/04/17 16:27:29 by tlupu            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,13 +16,13 @@ MLX_DIR = mlx_linux
 MLX_LIB = libmlx.a
 GET_NEXT_LINE = get_next_line.a
 GNL_DIR = get_next_line
-SRCS = so_long.c helper/utils.c 
+SRCS = so_long.c mandatory/game/game_disp_sprites.c mandatory/game/game_move_charact.c mandatory/game/rendering.c
 OBJS = $(SRCS:.c=.o)
 OBJSBON = $(BONUS:.c=.o)
-BONUS = so_long_bonus.c helper/utils.c map_validate/map_features.c errors/errors.c load_textures/textures.c \
-		helper/utils1.c helper/utils2.c map_fill_cordinates/map_coordinates.c game_features/features.c game_features/shooting.c\
-		game_features/door.c game_features/movement.c game_features/movement2.c helper/utils3.c\
-		map_fill_cordinates/more_checks.c game_features/rendering.c \
+BONUS = so_long_bonus.c bonus/helper/utils.c bonus/map_validate/map_features.c bonus/errors/errors.c bonus/load_textures/textures.c \
+		bonus/helper/utils1.c bonus/helper/utils2.c bonus/map_fill_cordinates/map_coordinates.c bonus/game_features/features.c bonus/game_features/shooting.c\
+		bonus/game_features/door.c bonus/game_features/movement.c bonus/game_features/movement2.c bonus/helper/utils3.c\
+		bonus/map_fill_cordinates/more_checks.c bonus/game_features/rendering.c\
 		
 %.o: %.c
 	$(CC) -Wall -Wextra -Werror -g -Imlx -c $< -o $@

@@ -12,7 +12,25 @@
 
 #include "so_long.h"
 
+int	error_fct(int num)
+{
+	num = 1;
+	write(2, "Error\n", 7);
+	return (num);
+}
 
+void	load_images(t_mlx *win, int img_width, int img_height)
+{
+	char	*relative_path_wall;
+	char	*relative_path_character;
+
+	relative_path_wall = "textures/wall.xpm";
+	relative_path_character = "textures/character/CharacterRight.xpm";
+	win->test_img = mlx_xpm_file_to_image(win->mlx, relative_path_wall,
+			&img_width, &img_height);
+	win->charcaterimg = mlx_xpm_file_to_image(win->mlx, relative_path_character,
+			&img_width, &img_height);
+}
 
 void init_structs(t_mlx *win)
 {
@@ -41,6 +59,6 @@ int main(int argc, char **argv)
         setup_hooks(&win);
         mlx_loop(win.mlx);
     }
-	free_all(win.arr);
+	free_arr(win.arr);
     return (0);
 }

@@ -12,6 +12,29 @@
 
 #include "../../so_long.h"
 
+void	draw_background(t_mlx *win)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (win->arr[i] != NULL)
+	{
+		j = 0;
+		while (win->arr[i][j])
+		{
+			mlx_put_image_to_window(win->mlx, win->mlx_win, win->background_img,
+				j * 64, i * 64);
+			j++;
+		}
+		i++;
+	}
+	i--;
+	mlx_put_image_to_window(win->mlx, win->mlx_win, win->background_img, j * 64,
+		i * 64);
+}
+
+
 int	key_hook(int key_code, t_mlx *win)
 {
 	static int	count;
@@ -32,8 +55,8 @@ int	key_hook(int key_code, t_mlx *win)
 
 int close_event(t_mlx *win)
 {
-    mlx_destroy_window(win->mlx, win->mlx_win);
-    exit(0);
+	close_events(win);
+	return(0);
 }
 
 void	setup_mlx(t_mlx *win)

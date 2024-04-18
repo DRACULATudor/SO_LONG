@@ -84,6 +84,11 @@ typedef struct s_info
 # define TS 64
 # define MAX 100
 
+
+
+void	load_imagess(t_mlx *win);
+void	init_images(t_mlx *win);
+void	init_door_and_coin(t_mlx *win);
 void		init_struct(t_mlx *win);
 void		init_struct2(t_mlx *win);
 void		*ft_memmove(void *dst, const void *src, size_t len);

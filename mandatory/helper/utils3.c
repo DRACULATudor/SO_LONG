@@ -24,7 +24,7 @@ void	destroy_door_and_coin(t_mlx *win)
 {
 	int	i = 0;
 
-	while (i < 6)
+	while (i < 5)
 	{
 		if (win->door_imgs[i])
 		{
@@ -34,7 +34,7 @@ void	destroy_door_and_coin(t_mlx *win)
 		i++;
 	}
 	i = 0;
-	while (i < 8)
+	while (i < 7)
 	{
 		if (win->coin_imgs[i])
 		{
@@ -71,4 +71,29 @@ void	close_events(t_mlx *win)
 		win->mlx_win = NULL;
 	}
 	exit(0);
+}
+
+void	count_map_features(char **arr, int *pande, int *c, int *enemy)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (arr[i] != NULL)
+	{
+		j = 0;
+		while (arr[i][j] != '\0')
+		{
+			if (arr[i][j] == 'E' || arr[i][j] == 'P')
+				(*pande)++;
+			else if (arr[i][j] == 'C')
+				(*c)++;
+			else if (arr[i][j] == 'T' || arr[i][j] == 'B')
+				(*enemy)++;
+			if (arr[i][j] == 'T' && arr[i][j - 1] != 'B')
+				return ;
+			j++;
+		}
+		i++;
+	}
 }

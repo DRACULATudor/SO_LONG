@@ -12,6 +12,14 @@
 
 #include "../../so_long.h"
 
+char	**error_fctc(int num)
+{
+	num = 1;
+	write(2, "Error\n", 7);
+	num = num - 1;
+	return (NULL);
+}
+
 char	**allocate_new_arr(char **arr, int i)
 {
 	char	**new_arr;

@@ -65,3 +65,31 @@ void	display_door(t_mlx *win)
 	}
 }
 
+void	load_image(t_mlx *win, void **img, char *path)
+{
+	int	img_width;
+	int	img_height;
+
+	img_width = 64;
+	img_height = 64;
+	if (*img)
+	{
+		mlx_destroy_image(win->mlx, *img);
+		*img = NULL;
+	}
+	*img = mlx_xpm_file_to_image(win->mlx, path, &img_width, &img_height);
+}
+
+void	load_imagess(t_mlx *win)
+{
+	char	*path_ml;
+	char	*path_r;
+	char	*path_C;
+
+	path_ml = "textures/character/CharacterMoreRight.xpm";
+	path_r = "textures/character/CharacterLeft.xpm";
+	path_C = "textures/character/CharacterCenter.xpm";
+	load_image(win, &(win->character_img_l), path_ml);
+	load_image(win, &(win->character_img_r), path_r);
+	load_image(win, &(win->character_img_ur), path_C);
+}

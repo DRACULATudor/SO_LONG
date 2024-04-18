@@ -18,7 +18,7 @@ GET_NEXT_LINE = get_next_line.a
 GNL_DIR = get_next_line
 SRCS = so_long.c mandatory/game/game_disp_sprites.c mandatory/game/game_move_charact.c mandatory/game/rendering.c mandatory/helper/utils.c \
 		mandatory/helper/utils2.c mandatory/helper/utils3.c mandatory/load_textures/textures.c mandatory/map_arr/map_make.c \
-		mandatory/map_checks/map_checks.c mandatory/map_checks/path_checks.c \
+		mandatory/map_checks/map_checks.c mandatory/map_checks/path_checks.c mandatory/helper/utils4.c \
 
 OBJS = $(SRCS:.c=.o)
 OBJSBON = $(BONUS:.c=.o)

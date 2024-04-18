@@ -80,15 +80,15 @@ void	init_images(t_mlx *win)
 	win->background_img = NULL;
 }
 
-void	init_enemy_and_bullet(t_mlx *win)
+void	init_door_and_coin(t_mlx *win)
 {
 	int	i = 0;
 
-	while (i < 8)
+	while (i < 7)
 	{
-		win->enemy[i] = NULL;
-		if (i < 7)
-			win->bullet_img[i] = NULL;
+		win->coin_imgs[i] = NULL;
+		if (i < 5)
+			win->door_imgs[i] = NULL;
 		i++;
 	}
 }

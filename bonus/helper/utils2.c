@@ -6,7 +6,7 @@
 /*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 16:23:50 by tlupu             #+#    #+#             */
-/*   Updated: 2024/04/17 15:04:30 by tlupu            ###   ########.fr       */
+/*   Updated: 2024/04/19 14:13:47 by tlupu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ char	*ft_strcpy(char *dst, char *src)
 	dst[i] = '\0';
 	return (dst);
 }
+
 void	free_arr(char **arr)
 {
 	int	i;

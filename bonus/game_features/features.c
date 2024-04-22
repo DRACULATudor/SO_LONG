@@ -6,7 +6,7 @@
 /*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 17:13:51 by tlupu             #+#    #+#             */
-/*   Updated: 2024/04/17 15:04:46 by tlupu            ###   ########.fr       */
+/*   Updated: 2024/04/19 16:32:02 by tlupu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,15 @@ void	load_and_clear(t_mlx *win, int *center_x, int *center_y)
 
 void	game_over(t_mlx *win)
 {
-	long long int	i;
-	int				center_x;
-	int				center_y;
+	int	center_x;
+	int	center_y;
 
-	i = 30000;
 	win->over = true;
 	load_and_clear(win, &center_x, &center_y);
-	while (i > 0)
-	{
-		mlx_put_image_to_window(win->mlx, win->mlx_win, win->over_img, center_x,
-			center_y);
-		i--;
-	}
-	mlx_loop_hook(win->mlx, NULL, NULL);
-	exit(0);
+	mlx_put_image_to_window(win->mlx, win->mlx_win, win->over_img, center_x,
+		center_y);
+	mlx_hook(win->mlx_win, 2, 1L << 0, key_press, win);
+	mlx_hook(win->mlx_win, 17, 1L << 17, close_event, win);
 }
 
 void	display_troop_image(t_mlx *win, int current_frame)

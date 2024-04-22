@@ -6,7 +6,7 @@
 /*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:49:41 by tlupu             #+#    #+#             */
-/*   Updated: 2024/04/17 15:54:38 by tlupu            ###   ########.fr       */
+/*   Updated: 2024/04/19 12:07:17 by tlupu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	draw_background(t_mlx *win)
 		i * 64);
 }
 
-
 int	key_hook(int key_code, t_mlx *win)
 {
 	static int	count;
@@ -53,10 +52,10 @@ int	key_hook(int key_code, t_mlx *win)
 	return (0);
 }
 
-int close_event(t_mlx *win)
+int	close_event(t_mlx *win)
 {
 	close_events(win);
-	return(0);
+	return (0);
 }
 
 void	setup_mlx(t_mlx *win)
@@ -75,9 +74,10 @@ void	setup_mlx(t_mlx *win)
 			&img_width, &img_height);
 }
 
-void setup_hooks(t_mlx *win)
+void	setup_hooks(t_mlx *win)
 {
-    mlx_loop_hook(win->mlx, display_next_frame_and_door, win);
-    mlx_key_hook(win->mlx_win, key_hook, (void *)win);
-    mlx_hook(win->mlx_win, 17, 1L<<17, close_event, win);
+	mlx_loop_hook(win->mlx, display_next_frame_and_door, win);
+	mlx_key_hook(win->mlx_win, key_hook, (void *)win);
+	mlx_hook(win->mlx_win, 2, 1L << 0, key_press, win);
+	mlx_hook(win->mlx_win, 17, 1L << 17, close_event, win);
 }

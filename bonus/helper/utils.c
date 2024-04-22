@@ -6,7 +6,7 @@
 /*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 14:59:42 by tlupu             #+#    #+#             */
-/*   Updated: 2024/04/17 15:00:46 by tlupu            ###   ########.fr       */
+/*   Updated: 2024/04/19 14:14:24 by tlupu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	*ft_memset(void *b, int c, size_t len)
 	}
 	return (b);
 }
+
 void	*ft_calloc(size_t count, size_t size)
 {
 	size_t	i;
@@ -93,38 +94,4 @@ char	*ft_itoa(int n)
 		i--;
 	}
 	return (str);
-}
-
-void	*ft_memmove(void *dst, const void *src, size_t len)
-{
-	char	*sour;
-	char	*dest;
-	size_t	i;
-
-	sour = (char *)src;
-	dest = (char *)dst;
-	if (sour > dest)
-	{
-		i = 0;
-		while (i < len)
-		{
-			dest[i] = sour[i];
-			i++;
-		}
-	}
-	else if (sour < dest)
-	{
-		i = len;
-		while (i > 0)
-		{
-			dest[i - 1] = sour[i - 1];
-			i--;
-		}
-	}
-	return (dst);
-}
-
-void	*ft_memcpy(void *dst, const void *src, size_t len)
-{
-	return (ft_memmove(dst, src, len));
 }

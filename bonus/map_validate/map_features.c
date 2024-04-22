@@ -6,7 +6,7 @@
 /*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 15:48:11 by tlupu             #+#    #+#             */
-/*   Updated: 2024/04/17 15:03:55 by tlupu            ###   ########.fr       */
+/*   Updated: 2024/04/19 17:14:03 by tlupu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ int	validate_map_features(char **arr, t_mlx *win)
 			len = j;
 		else if (len != j)
 		{
-			printf("Error ->Invalid map\n");
+			write(2, "Error\n", 7);
 			return (1);
 		}
 		i++;

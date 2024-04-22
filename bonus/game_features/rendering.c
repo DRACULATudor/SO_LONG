@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rendering.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/19 14:26:10 by tlupu             #+#    #+#             */
+/*   Updated: 2024/04/19 18:25:41 by tlupu            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../so_long.h"
 
@@ -47,15 +58,22 @@ void	draw_background(t_mlx *win)
 
 int	display_all(t_mlx *win)
 {
-	display_next_frame_and_door(win);
-	display_troop(win);
-	bullet_shooting(win);
+	if (!win->over)
+	{
+		display_next_frame_and_door(win);
+		display_troop(win);
+		bullet_shooting(win);
+	}
 	return (0);
 }
 
 void	setup_hooks(t_mlx *win)
 {
-	mlx_loop_hook(win->mlx, display_all, win);
-	mlx_key_hook(win->mlx_win, key_hook, (void *)win);
-	mlx_hook(win->mlx_win, 17, 1L << 17, close_event, win);
+	if (!win->over)
+	{
+		mlx_loop_hook(win->mlx, display_all, win);
+		mlx_key_hook(win->mlx_win, key_hook, (void *)win);
+		mlx_hook(win->mlx_win, 2, 1L << 0, key_press, win);
+		mlx_hook(win->mlx_win, 17, 1L << 17, close_event, win);
+	}
 }

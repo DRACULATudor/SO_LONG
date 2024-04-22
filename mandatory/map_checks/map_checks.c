@@ -6,7 +6,7 @@
 /*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:13:51 by tlupu             #+#    #+#             */
-/*   Updated: 2024/04/17 15:14:31 by tlupu            ###   ########.fr       */
+/*   Updated: 2024/04/19 17:02:35 by tlupu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,15 @@
 int	validate_map_features_custom(char **arr)
 {
 	int	pande;
-	int	enemy;
 	int	c;
 
 	pande = 0;
-	enemy = 0;
 	c = 0;
-	count_map_features(arr, &pande, &c, &enemy);
+	count_map_featuress(arr, &pande, &c);
 	if (pande != 2)
 		return (error_fct(pande));
 	if (c < 1)
 		return (error_fct(c));
-	if (enemy != 2)
-		return (error_fct(enemy));
 	return (0);
 }
 
@@ -113,7 +109,7 @@ int	validate_map_features(char **arr, t_mlx *win)
 			len = j;
 		else if (len != j)
 		{
-			printf("Error ->Invalid map\n");
+			write(2,"Errtor\n", 7);
 			return (1);
 		}
 		i++;

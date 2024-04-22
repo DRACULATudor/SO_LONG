@@ -6,7 +6,7 @@
 /*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:40:04 by tlupu             #+#    #+#             */
-/*   Updated: 2024/04/17 16:22:00 by tlupu            ###   ########.fr       */
+/*   Updated: 2024/04/22 15:03:33 by tlupu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,6 @@ void	display_elements(t_mlx *win, int i, int j, int *current_frame,
 
 	p_x = get_e_x(win->arr);
 	p_y = get_e_y(win->arr);
-	if (win->exit == true && p_x == i && p_y == j)
-	{
-		close_events(win);
-		exit(0);
-	}
 	if (win->arr[i][j] == 'C')
 		mlx_put_image_to_window(win->mlx, win->mlx_win,
 			win->coin_imgs[*current_frame], j * 64, i * 64);

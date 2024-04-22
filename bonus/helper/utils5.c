@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils3.c                                           :+:      :+:    :+:   */
+/*   utils5.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/17 16:03:49 by tlupu             #+#    #+#             */
-/*   Updated: 2024/04/19 12:58:49 by tlupu            ###   ########.fr       */
+/*   Created: 2024/04/19 14:12:21 by tlupu             #+#    #+#             */
+/*   Updated: 2024/04/19 14:13:26 by tlupu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,29 @@ void	init_struct2(t_mlx *win)
 	win->mlx = NULL;
 	win->mlx_win = NULL;
 	init_images(win);
+	init_enemy_and_bullet(win);
 	init_door_and_coin(win);
+}
+
+void	destroy_enemy_and_bullet(t_mlx *win)
+{
+	int	i;
+
+	i = 0;
+	while (i < 8)
+	{
+		if (win->enemy[i])
+		{
+			mlx_destroy_image(win->mlx, win->enemy[i]);
+			win->enemy[i] = NULL;
+		}
+		if (i < 7 && win->bullet_img[i])
+		{
+			mlx_destroy_image(win->mlx, win->bullet_img[i]);
+			win->bullet_img[i] = NULL;
+		}
+		i++;
+	}
 }
 
 void	destroy_door_and_coin(t_mlx *win)
@@ -25,7 +47,7 @@ void	destroy_door_and_coin(t_mlx *win)
 	int	i;
 
 	i = 0;
-	while (i < 5)
+	while (i < 6)
 	{
 		if (win->door_imgs[i])
 		{
@@ -35,7 +57,7 @@ void	destroy_door_and_coin(t_mlx *win)
 		i++;
 	}
 	i = 0;
-	while (i < 7)
+	while (i < 8)
 	{
 		if (win->coin_imgs[i])
 		{
@@ -64,6 +86,7 @@ void	destroy_image(t_mlx *win)
 
 void	close_events(t_mlx *win)
 {
+	destroy_enemy_and_bullet(win);
 	destroy_door_and_coin(win);
 	destroy_image(win);
 	if (win->mlx_win)
@@ -72,28 +95,4 @@ void	close_events(t_mlx *win)
 		win->mlx_win = NULL;
 	}
 	exit(0);
-}
-
-void	count_map_featuress(char **arr, int *pande, int *c)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (arr[i] != NULL)
-	{
-		j = 0;
-		while (arr[i][j] != '\0')
-		{
-			if (arr[i][j] == 'E' || arr[i][j] == 'P')
-				(*pande)++;
-			else if (arr[i][j] == 'C')
-				(*c)++;
-			else if (arr[i][j] != 'E' && arr[i][j] != 'P' && arr[i][j] != 'C'
-				&& arr[i][j] != '0' && arr[i][j] != '1' && arr[i][j] != '\n')
-				return ;
-			j++;
-		}
-		i++;
-	}
 }

@@ -6,7 +6,7 @@
 /*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:52:06 by tlupu             #+#    #+#             */
-/*   Updated: 2024/04/17 16:04:36 by tlupu            ###   ########.fr       */
+/*   Updated: 2024/04/19 11:53:26 by tlupu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,13 @@ void	free_arr(char **arr)
 	}
 	free(arr);
 }
+
 void	init_struct(t_mlx *win)
 {
 	win->dor_y = 0;
 	win->dor_x = 0;
 	win->width = 0;
+	win->check_paa = 0;
 	win->height = 0;
 	win->special_key = 0;
 	win->x = 0;
@@ -69,6 +71,7 @@ void	init_struct(t_mlx *win)
 
 void	init_images(t_mlx *win)
 {
+	win->map2 = NULL;
 	win->bullet = NULL;
 	win->test_img = NULL;
 	win->charcaterimg = NULL;
@@ -82,8 +85,9 @@ void	init_images(t_mlx *win)
 
 void	init_door_and_coin(t_mlx *win)
 {
-	int	i = 0;
+	int	i;
 
+	i = 0;
 	while (i < 7)
 	{
 		win->coin_imgs[i] = NULL;
@@ -92,6 +96,3 @@ void	init_door_and_coin(t_mlx *win)
 		i++;
 	}
 }
-
-
-

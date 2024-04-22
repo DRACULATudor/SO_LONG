@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   movement2.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/19 14:26:41 by tlupu             #+#    #+#             */
+/*   Updated: 2024/04/19 14:27:05 by tlupu            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../so_long.h"
 
 void	load_count(t_mlx *win)
@@ -46,14 +58,14 @@ void	load_imagess(t_mlx *win)
 {
 	char	*path_ml;
 	char	*path_r;
-	char	*path_C;
+	char	*path_c;
 
 	path_ml = "textures/character/CharacterMoreRight.xpm";
 	path_r = "textures/character/CharacterLeft.xpm";
-	path_C = "textures/character/CharacterCenter.xpm";
+	path_c = "textures/character/CharacterCenter.xpm";
 	load_image(win, &(win->character_img_l), path_ml);
 	load_image(win, &(win->character_img_r), path_r);
-	load_image(win, &(win->character_img_ur), path_C);
+	load_image(win, &(win->character_img_ur), path_c);
 }
 
 int	key_hook(int key_code, t_mlx *win)

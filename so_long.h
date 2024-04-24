@@ -6,7 +6,7 @@
 /*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 11:41:36 by tlupu             #+#    #+#             */
-/*   Updated: 2024/04/19 17:09:31 by tlupu            ###   ########.fr       */
+/*   Updated: 2024/04/24 12:52:43 by tlupu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +161,6 @@ void		update_position(t_mlx *win, int key_code, char **arr);
 void		load_count(t_mlx *win);
 void		load_imagess(t_mlx *win);
 int			key_hook(int key_code, t_mlx *win);
-void		count_map_features(char **arr, int *pande, int *c, int *enemy);
 int			check_valid(char **map, t_point size, t_point begin);
 int			check_map(char **map);
 int			validate_args(int argc, char **argv, t_mlx *win);
@@ -173,6 +172,7 @@ void		setup_hooks(t_mlx *win);
 void		free_all(char **arr);
 void		close_events(t_mlx *win);
 void		count_map_featuress(char **arr, int *pande, int *c);
+void		count_map_features(char **arr, int *pande, int *c);
 void		destroy_images(t_mlx *win);
 int			key_press(int keycode, t_mlx *win);
 void		init_structs(t_mlx *win);

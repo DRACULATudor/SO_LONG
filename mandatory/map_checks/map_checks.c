@@ -6,7 +6,7 @@
 /*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:13:51 by tlupu             #+#    #+#             */
-/*   Updated: 2024/04/19 17:02:35 by tlupu            ###   ########.fr       */
+/*   Updated: 2024/04/24 12:52:13 by tlupu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	validate_map_features_custom(char **arr)
 
 	pande = 0;
 	c = 0;
-	count_map_featuress(arr, &pande, &c);
+	count_map_features(arr, &pande, &c);
 	if (pande != 2)
 		return (error_fct(pande));
 	if (c < 1)

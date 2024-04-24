@@ -6,7 +6,7 @@
 /*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:45:53 by tlupu             #+#    #+#             */
-/*   Updated: 2024/04/22 15:18:49 by tlupu            ###   ########.fr       */
+/*   Updated: 2024/04/22 15:27:37 by tlupu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,15 +137,15 @@ void	update_position(t_mlx *win, int key_code, char **arr)
 		j = -1;
 		while (arr[i][++j] != '\0')
 		{
-			if (arr[i][j] == 'P' && win->exit && (arr[i][j - 1] == 'E'
-					|| arr[i][j + 1] == 'E' || arr[i + 1][j] == 'E' || arr[i
-					- 1][j] == 'E'))
-			{
-				close_event(win);
-				exit(1);
-			}
 			if (arr[i][j] == 'P')
 			{
+				if (arr[i][j] == 'P' && win->exit && (arr[i][j - 1] == 'E'
+						|| arr[i][j + 1] == 'E' || arr[i + 1][j] == 'E' || arr[i
+						- 1][j] == 'E'))
+				{
+					close_event(win);
+					exit(1);
+				}
 				if (key_code == A)
 					move_left(win, arr, i, j);
 				else if (key_code == D)

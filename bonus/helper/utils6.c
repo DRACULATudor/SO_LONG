@@ -6,7 +6,7 @@
 /*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 14:27:26 by tlupu             #+#    #+#             */
-/*   Updated: 2024/04/19 16:31:35 by tlupu            ###   ########.fr       */
+/*   Updated: 2024/04/22 15:35:36 by tlupu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,13 @@ void	update_position(t_mlx *win, int key_code, char **arr)
 		{
 			if (arr[pos.i][pos.j] == 'P' && !win->over)
 			{
+				if (arr[pos.i][pos.j] == 'P' && win->exit && (arr[pos.i][pos.j - 1] == 'E'
+						|| arr[pos.i][pos.j + 1] == 'E' || arr[pos.i + 1][pos.j] == 'E' || arr[pos.i
+						- 1][pos.j] == 'E'))
+				{
+					close_event(win);
+					exit(1);
+				}
 				move_player(win, arr, pos, key_code);
 				destroy_images(win);
 				kill_player(win, key_code);

@@ -6,12 +6,12 @@
 #    By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/15 16:47:59 by tlupu             #+#    #+#              #
-#    Updated: 2024/04/19 17:43:57 by tlupu            ###   ########.fr        #
+#    Updated: 2024/04/24 13:02:39 by tlupu            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
-B_NAME = so_long
+B_NAME = so_long_bonus
 CC = cc -g
 MLX_DIR = mlx_linux
 MLX_LIB = libmlx.a
@@ -28,7 +28,7 @@ OBJS = $(SRCS:.c=.o)
 BONUS = so_long_bonus.c bonus/helper/utils.c bonus/map_validate/map_features.c bonus/errors/errors.c bonus/load_textures/textures.c \
 		bonus/helper/utils1.c bonus/helper/utils2.c bonus/map_fill_cordinates/map_coordinates.c bonus/game_features/features.c bonus/game_features/shooting.c\
 		bonus/game_features/door.c bonus/game_features/movement.c bonus/game_features/movement2.c bonus/helper/utils3.c\
-		bonus/map_fill_cordinates/more_checks.c bonus/game_features/rendering.c bonus/helper/utils4.c bonus/helper/utils5.c bonus/helper/utils6.c \
+		bonus/map_fill_cordinates/more_checks.c bonus/game_features/rendering.c bonus/helper/utils4.c bonus/helper/utils5.c bonus/helper/utils6.c bonus/helper/utils7.c\
 		
 OBJSBON = $(BONUS:.c=.o)
 %.o: %.c
@@ -37,10 +37,10 @@ OBJSBON = $(BONUS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS) $(MLX_DIR)/$(MLX_LIB) $(GNL_DIR)/$(GET_NEXT_LINE) $(PRNDR)/$(PRINTF)
-	$(CC) -o $(NAME) $(OBJS) -L$(MLX_DIR) -lmlx -L$(GNL_DIR) -l:$(GET_NEXT_LINE) -L$(PRNDR) -l:$(PRINTF) -lXext -lX11 -lm
+	$(CC) -o $(NAME) $(OBJS) -L$(MLX_DIR) -lmlx -L$(PRNDR) -l:$(PRINTF) -lXext -lX11 -lm
 
 bonus: $(OBJSBON) $(MLX_DIR)/$(MLX_LIB) $(GNL_DIR)/$(GET_NEXT_LINE)
-	$(CC) -o $(B_NAME) $(OBJSBON) -L$(MLX_DIR) -lmlx -L$(GNL_DIR) -l:$(GET_NEXT_LINE) -L$(PRNDR) -l:$(PRINTF) -lXext -lX11 -lm
+	$(CC) -o $(B_NAME) $(OBJSBON) -L$(MLX_DIR) -lmlx -L$(GNL_DIR) -l:$(GET_NEXT_LINE) -lXext -lX11 -lm
 
 $(MLX_DIR)/$(MLX_LIB):
 	$(MAKE) -C $(MLX_DIR)
@@ -52,13 +52,13 @@ $(PRNDR)/$(PRINTF):
 	$(MAKE) -C $(PRNDR)
 
 clean:
-	$(MAKE)	clean -C $(MLX_DIR)
-	$(MAKE)	clean -C $(GNL_DIR)
+	$(MAKE) clean -C $(MLX_DIR)
+	$(MAKE) clean -C $(GNL_DIR)
 	$(MAKE) clean -C $(PRNDR)
-	rm -f	$(OBJS) 
-	rm -f 	$(OBJSBON)
+	rm -f $(OBJS) 
+	rm -f $(OBJSBON)
 
-fclean:	clean
-	rm -f $(NAME)
+fclean: clean
+	rm -f $(NAME) $(B_NAME)
 	
-re:	fclean all
+re: fclean all

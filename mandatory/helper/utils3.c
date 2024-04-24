@@ -6,7 +6,7 @@
 /*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 16:03:49 by tlupu             #+#    #+#             */
-/*   Updated: 2024/04/19 12:58:49 by tlupu            ###   ########.fr       */
+/*   Updated: 2024/04/24 12:55:49 by tlupu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	close_events(t_mlx *win)
 	exit(0);
 }
 
-void	count_map_featuress(char **arr, int *pande, int *c)
+void	count_map_features(char **arr, int *pande, int *c)
 {
 	int	i;
 	int	j;
@@ -91,7 +91,10 @@ void	count_map_featuress(char **arr, int *pande, int *c)
 				(*c)++;
 			else if (arr[i][j] != 'E' && arr[i][j] != 'P' && arr[i][j] != 'C'
 				&& arr[i][j] != '0' && arr[i][j] != '1' && arr[i][j] != '\n')
-				return ;
+			{
+				write(1, "Error\n", 7);
+				exit(1);
+			}
 			j++;
 		}
 		i++;

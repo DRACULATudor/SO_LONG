@@ -6,36 +6,11 @@
 /*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 14:11:49 by tlupu             #+#    #+#             */
-/*   Updated: 2024/04/19 14:13:35 by tlupu            ###   ########.fr       */
+/*   Updated: 2024/04/24 12:51:59 by tlupu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../so_long.h"
-
-void	count_map_features(char **arr, int *pande, int *c, int *enemy)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (arr[i] != NULL)
-	{
-		j = 0;
-		while (arr[i][j] != '\0')
-		{
-			if (arr[i][j] == 'E' || arr[i][j] == 'P')
-				(*pande)++;
-			else if (arr[i][j] == 'C')
-				(*c)++;
-			else if (arr[i][j] == 'T' || arr[i][j] == 'B')
-				(*enemy)++;
-			if (arr[i][j] == 'T' && arr[i][j - 1] != 'B')
-				return ;
-			j++;
-		}
-		i++;
-	}
-}
 
 void	init_struct(t_mlx *win)
 {

@@ -6,7 +6,7 @@
 /*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 11:41:36 by tlupu             #+#    #+#             */
-/*   Updated: 2024/04/24 12:52:43 by tlupu            ###   ########.fr       */
+/*   Updated: 2024/04/24 20:11:13 by tlupu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,11 @@ typedef struct s_point
 	int		y;
 }			t_point;
 
-typedef struct
+typedef struct s_frames
 {
-	char	**map;
-	int		x;
-	int		y;
-	int		map_width;
-	int		map_height;
-}			ValidCheckParams;
+	int		current_frame;
+	int		door_frame;
+}			t_frames;
 
 typedef struct s_bullet
 {
@@ -49,6 +46,7 @@ typedef struct s_bullet
 
 typedef struct s_mlx
 {
+	int		key_code;
 	int		check_paa;
 	int		dor_y;
 	int		dor_x;
@@ -124,6 +122,7 @@ int			ft_strleng(char *str);
 void		move_player(t_mlx *win, char **arr, t_position pos, int key_code);
 int			close_event(t_mlx *win);
 char		*ft_itoa(int n);
+void		display_cin(t_mlx *win, int i, int j, int *current_frame);
 int			validate_map_features_custom(char **arr);
 int			validate_map_features(char **arr, t_mlx *win);
 int			error_fct(int num);
@@ -176,6 +175,8 @@ void		count_map_features(char **arr, int *pande, int *c);
 void		destroy_images(t_mlx *win);
 int			key_press(int keycode, t_mlx *win);
 void		init_structs(t_mlx *win);
+void		move_character(t_mlx *win, char **arr, int i, int j);
 int			validate_map_size(char **map);
+void		check_exit(t_mlx *win, char **arr, int i, int j);
 
 #endif

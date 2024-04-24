@@ -6,7 +6,7 @@
 /*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 14:10:52 by tlupu             #+#    #+#             */
-/*   Updated: 2024/04/19 17:17:51 by tlupu            ###   ########.fr       */
+/*   Updated: 2024/04/24 16:27:01 by tlupu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,11 @@ void	init_bullet(t_bullet *bullet)
 
 int	validate_map_size(char **map)
 {
-	int width = strlen(map[0]);
-	int height = 0;
+	int	width;
+	int	height;
+
+	width = strlen(map[0]);
+	height = 0;
 	while (map[height] != NULL)
 	{
 		height++;

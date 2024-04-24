@@ -6,7 +6,7 @@
 /*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 16:19:54 by tlupu             #+#    #+#             */
-/*   Updated: 2024/04/19 14:11:37 by tlupu            ###   ########.fr       */
+/*   Updated: 2024/04/24 19:16:02 by tlupu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,8 @@ int	check_map(char **map)
 	t_point	size;
 	t_point	begin;
 
+	if (map == NULL || map[0] == NULL)
+		return (0);
 	size.x = 0;
 	size.y = 0;
 	while (map[0][size.x])

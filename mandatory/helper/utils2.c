@@ -6,7 +6,7 @@
 /*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:52:06 by tlupu             #+#    #+#             */
-/*   Updated: 2024/04/19 11:53:26 by tlupu            ###   ########.fr       */
+/*   Updated: 2024/04/24 16:13:27 by tlupu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	init_struct(t_mlx *win)
 
 void	init_images(t_mlx *win)
 {
+	win->key_code = 0;
 	win->map2 = NULL;
 	win->bullet = NULL;
 	win->test_img = NULL;

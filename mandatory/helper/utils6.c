@@ -6,7 +6,7 @@
 /*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 12:59:12 by tlupu             #+#    #+#             */
-/*   Updated: 2024/04/24 12:51:12 by tlupu            ###   ########.fr       */
+/*   Updated: 2024/04/24 16:01:40 by tlupu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,11 @@ void	init_structs(t_mlx *win)
 
 int	validate_map_size(char **map)
 {
-	int width = strlen(map[0]);
-	int height = 0;
+	int	width;
+	int	height;
+
+	width = strlen(map[0]);
+	height = 0;
 	while (map[height] != NULL)
 	{
 		height++;
@@ -54,3 +57,26 @@ int	validate_map_size(char **map)
 	return (0);
 }
 
+void	update_position(t_mlx *win, int key_code, char **arr)
+{
+	int	i;
+	int	j;
+
+	win->key_code = key_code;
+	load_imagess(win);
+	i = -1;
+	while (arr[++i] != NULL)
+	{
+		j = -1;
+		while (arr[i][++j] != '\0')
+		{
+			if (arr[i][j] == 'P')
+			{
+				check_exit(win, arr, i, j);
+				move_character(win, arr, i, j);
+				destroy_images(win);
+				return ;
+			}
+		}
+	}
+}

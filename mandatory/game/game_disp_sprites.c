@@ -6,7 +6,7 @@
 /*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:40:04 by tlupu             #+#    #+#             */
-/*   Updated: 2024/04/22 15:28:00 by tlupu            ###   ########.fr       */
+/*   Updated: 2024/04/24 16:24:06 by tlupu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,13 @@ int	validate_window_and_array(t_mlx *win)
 	return (0);
 }
 
-void	display_elements(t_mlx *win, int i, int j, int *current_frame,
-		int *door_frame)
+void	display_dor(t_mlx *win, int i, int j, int door_frame)
 {
-	int	p_x;
-	int	p_y;
-
-	p_x = get_e_x(win->arr);
-	p_y = get_e_y(win->arr);
-	if (win->arr[i][j] == 'C')
-		mlx_put_image_to_window(win->mlx, win->mlx_win,
-			win->coin_imgs[*current_frame], j * 64, i * 64);
-	if (win->arr[i][j] == 'E' && *door_frame <= 5)
+	if (win->arr[i][j] == 'E' && door_frame <= 5)
 	{
 		mlx_put_image_to_window(win->mlx, win->mlx_win,
-			win->door_imgs[*door_frame], j * 64, i * 64);
-		if (*door_frame == 4)
+			win->door_imgs[door_frame], j * 64, i * 64);
+		if (door_frame == 4)
 		{
 			win->exit = true;
 			return ;
@@ -45,16 +36,21 @@ void	display_elements(t_mlx *win, int i, int j, int *current_frame,
 	}
 }
 
-void	update_frames_and_counter(t_mlx *win, int *current_frame,
-		int *door_frame, int *counter)
+void	display_elements(t_mlx *win, int i, int j, t_frames *frames)
 {
-	if (*counter % 750 == 0)
+	display_cin(win, i, j, &frames->current_frame);
+	display_dor(win, i, j, frames->door_frame);
+}
+
+void	update_frames_and_counter(t_mlx *win, t_frames *frames, int *counter)
+{
+	if (*counter % 1000 == 0)
 	{
-		*current_frame = (*current_frame + 1) % 8;
+		frames->current_frame = (frames->current_frame + 1) % 8;
 		if (check_for_colectables(win) && !win->exit)
 		{
 			if (*counter % 5 == 0)
-				*door_frame = (*door_frame + 1) % 5;
+				frames->door_frame = (frames->door_frame + 1) % 5;
 		}
 		if (!(check_for_colectables(win)))
 			*counter = 0;
@@ -64,11 +60,10 @@ void	update_frames_and_counter(t_mlx *win, int *current_frame,
 
 int	display_next_frame_and_door(t_mlx *win)
 {
-	static int	current_frame = 0;
-	static int	door_frame = 0;
-	static int	counter = 0;
-	int			i;
-	int			j;
+	static t_frames	frames = {0, 0};
+	static int		counter = 0;
+	int				i;
+	int				j;
 
 	if (validate_window_and_array(win))
 		return (1);
@@ -78,11 +73,11 @@ int	display_next_frame_and_door(t_mlx *win)
 		j = 0;
 		while (win->arr[i][j] != '\0')
 		{
-			display_elements(win, i, j, &current_frame, &door_frame);
+			display_elements(win, i, j, &frames);
 			j++;
 		}
 		i++;
 	}
-	update_frames_and_counter(win, &current_frame, &door_frame, &counter);
+	update_frames_and_counter(win, &frames, &counter);
 	return (0);
 }

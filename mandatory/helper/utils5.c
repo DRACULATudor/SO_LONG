@@ -6,7 +6,7 @@
 /*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 11:35:57 by tlupu             #+#    #+#             */
-/*   Updated: 2024/04/19 12:06:46 by tlupu            ###   ########.fr       */
+/*   Updated: 2024/04/24 19:40:07 by tlupu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	validate_args(int argc, char **argv, t_mlx *win)
 	i = ft_strleng(argv[1]);
 	if (i < 4 || (argv[1][i - 4] != '.' || argv[1][i - 3] != 'b' || argv[1][i
 			- 2] != 'e' || argv[1][i - 1] != 'r'))
-		return (1);
+		return (error_fct(1));
 	return (0);
 }
 

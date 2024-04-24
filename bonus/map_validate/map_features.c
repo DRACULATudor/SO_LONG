@@ -6,7 +6,7 @@
 /*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 15:48:11 by tlupu             #+#    #+#             */
-/*   Updated: 2024/04/22 15:52:43 by tlupu            ###   ########.fr       */
+/*   Updated: 2024/04/24 19:37:44 by tlupu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,15 +96,15 @@ int	validate_map_features(char **arr, t_mlx *win)
 	int	len;
 	int	valid;
 
+	if (arr == NULL)
+		exit (1);
 	i = 0;
 	len = -1;
 	while (arr[i] != NULL)
 	{
 		j = 0;
 		while (arr[i][j] != '\n' && arr[i][j] != '\0')
-		{
 			j++;
-		}
 		if (len == -1)
 			len = j;
 		else if (len != j)

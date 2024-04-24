@@ -6,7 +6,7 @@
 /*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 17:25:41 by tlupu             #+#    #+#             */
-/*   Updated: 2024/04/22 15:36:27 by tlupu            ###   ########.fr       */
+/*   Updated: 2024/04/24 16:35:59 by tlupu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,15 @@ void	reset_bullet_position(t_mlx *win, t_bullet *bullet)
 	y = get_p_y(win->arr);
 	if (bullet->initial_i == y && bullet->initial_j == x)
 		game_over(win);
-	win->arr[bullet->bullet_i][bullet->bullet_j] = '0';
-	win->arr[bullet->initial_i][bullet->initial_j] = 'B';
-	mlx_put_image_to_window(win->mlx, win->mlx_win, win->bullet_img[0],
-		bullet->initial_j * 64, bullet->initial_i * 64);
-	bullet->frame = 0;
-	win->wall = true;
+	else
+	{
+		win->arr[bullet->bullet_i][bullet->bullet_j] = '0';
+		win->arr[bullet->initial_i][bullet->initial_j] = 'B';
+		mlx_put_image_to_window(win->mlx, win->mlx_win, win->bullet_img[0],
+			bullet->initial_j * 64, bullet->initial_i * 64);
+		bullet->frame = 0;
+		win->wall = true;
+	}
 }
 
 void	handle_bullet_movement(t_mlx *win, int i, int j, t_bullet *bullet)

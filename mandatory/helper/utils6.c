@@ -6,7 +6,7 @@
 /*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 12:59:12 by tlupu             #+#    #+#             */
-/*   Updated: 2024/04/24 16:01:40 by tlupu            ###   ########.fr       */
+/*   Updated: 2024/04/24 21:09:17 by tlupu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	error_fct(int num)
 {
 	num = 1;
 	write(2, "Error\n", 7);
-	return (num);
+	exit (1);
 }
 
 void	load_images(t_mlx *win, int img_width, int img_height)

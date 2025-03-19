@@ -6,7 +6,7 @@
 /*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 17:25:41 by tlupu             #+#    #+#             */
-/*   Updated: 2024/04/24 16:35:59 by tlupu            ###   ########.fr       */
+/*   Updated: 2025/03/19 15:21:23 by tlupu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int	bullet_shooting(t_mlx *win)
 		initialized = 1;
 	}
 	iterate_through_map(win, &bullet);
-	if (bullet.counter % 500 == 0 && (win->exit == false || win->exit == true))
+	if (bullet.counter % 170 == 0 && (win->exit == false || win->exit == true))
 	{
 		bullet.frame = (bullet.frame + 1) % 7;
 		mlx_put_image_to_window(win->mlx, win->mlx_win,

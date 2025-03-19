@@ -6,7 +6,7 @@
 /*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 16:19:54 by tlupu             #+#    #+#             */
-/*   Updated: 2024/04/24 19:16:02 by tlupu            ###   ########.fr       */
+/*   Updated: 2024/04/24 21:01:53 by tlupu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ int	check_if_c_e_p(char **map2)
 		{
 			if (map2[i][j] == 'P' || map2[i][j] == 'C' || map2[i][j] == 'E')
 			{
-				write(2, "Error\n", 7);
 				return (0);
 			}
 			j++;
@@ -98,6 +97,11 @@ int	check_valid(char **map, t_point size, t_point begin)
 	if (!map2)
 		return (0);
 	valid = check_if_c_e_p(map2);
+	if (valid == 0)
+	{
+		write(2, "Error\n", 7);
+		exit(1);
+	}
 	free_arr(map2);
 	return (valid);
 }

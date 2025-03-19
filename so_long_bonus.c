@@ -6,7 +6,7 @@
 /*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 16:57:33 by tlupu             #+#    #+#             */
-/*   Updated: 2024/04/24 20:08:53 by tlupu            ###   ########.fr       */
+/*   Updated: 2024/04/24 20:45:30 by tlupu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ int	validate_and_setup(int argc, char **argv, t_mlx *win)
 	if (validate_args(argc, argv, win))
 		return (1);
 	win->arr = fill_map_arr(argv[1]);
-	check = validate_map_size(win->arr);
-	valid = check_map(win->arr);
 	validate = validate_map_features(win->arr, win);
+	valid = check_map(win->arr);
+	check = validate_map_size(win->arr);
 	if (validate == 0 && valid == 1 && check == 0)
 		setup_game(win);
 	return (0);

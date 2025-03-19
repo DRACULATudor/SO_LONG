@@ -6,7 +6,7 @@
 /*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 15:56:42 by tlupu             #+#    #+#             */
-/*   Updated: 2024/04/17 15:04:01 by tlupu            ###   ########.fr       */
+/*   Updated: 2024/04/24 21:09:57 by tlupu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ int	error_fct(int num)
 {
 	num = 1;
 	write(2, "Error\n", 7);
-	return (num);
+	num = num - 1;
+	exit(1);
 }
 
 char	**error_fctc(int num)
@@ -24,7 +25,7 @@ char	**error_fctc(int num)
 	num = 1;
 	write(2, "Error\n", 7);
 	num = num - 1;
-	return (NULL);
+	exit(1);
 }
 
 void	free_all(char **arr)

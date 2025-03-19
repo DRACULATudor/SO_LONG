@@ -6,7 +6,7 @@
 /*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 15:48:11 by tlupu             #+#    #+#             */
-/*   Updated: 2024/04/24 19:37:44 by tlupu            ###   ########.fr       */
+/*   Updated: 2024/04/24 21:08:00 by tlupu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int	validate_map_features(char **arr, t_mlx *win)
 		else if (len != j)
 		{
 			write(2, "Error\n", 7);
-			return (1);
+			exit (1);
 		}
 		i++;
 	}

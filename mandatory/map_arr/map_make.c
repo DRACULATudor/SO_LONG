@@ -6,7 +6,7 @@
 /*   By: tlupu <tlupu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:18:11 by tlupu             #+#    #+#             */
-/*   Updated: 2024/04/24 19:38:19 by tlupu            ###   ########.fr       */
+/*   Updated: 2024/04/24 21:11:27 by tlupu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	**error_fctc(int num)
 	num = 1;
 	write(2, "Error\n", 7);
 	num = num - 1;
-	return (NULL);
+	exit(1);
 }
 
 char	**allocate_new_arr(char **arr, int i)

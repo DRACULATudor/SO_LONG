@@ -17,7 +17,7 @@ make
 ```
 Or, if there is no Makefile:
 ```
-gcc -Wall -Wextra -Werror 
+gcc -Wall -Wextra -Werror
 ```
 Run the program:
 ```
